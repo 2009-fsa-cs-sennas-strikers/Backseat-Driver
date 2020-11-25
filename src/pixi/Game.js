@@ -2,19 +2,45 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withApp } from 'react-pixi-fiber';
 import Car from './Car';
+import {loadModel, startListening} from '../tenserFlow'
+import { math } from '@tensorflow/tfjs';
 
 // http://pixijs.io/examples/#/basics/basic.js
 class Game extends Component {
-  state = {
-    rotation: 0,
-    vx: 0,
-    vy: 0,
-    x: 0,
-    y: 0,
-  };
+  constructor() {
+    super()
+    this.state = {
+      rotation: 0,
+      vx: 0,
+      vy: 0,
+      x: 300,
+      y: 400,
+      speed: 0,
+      action: ''
+    }
+    this.voiceAction = this.voiceAction.bind(this)
+  }
+
+  // state = {
+  //   rotation: 0,
+  //   vx: 0,
+  //   vy: 0,
+  //   x: 0,
+  //   y: 0,
+  //   action: ''
+  // };
+
+  voiceAction(command) {
+    this.setState({
+      action: command
+    })
+    console.log('pixi game command:', this.state.action)
+  }
 
   componentDidMount() {
     this.props.app.ticker.add(this.animate);
+    loadModel()
+    startListening(this.voiceAction)
   }
 
   componentWillUnmount() {
@@ -40,68 +66,116 @@ class Game extends Component {
     //'left, then another left' = left, then down
 
     //Left arrow key `press` method
-    left.press = () => {
-      //Change the velocity when the key is pressed
+    if (this.state.action === 'go') {
       this.setState({
-        vx: -5,
+        speed: 1
+      })
+    }
+    if (this.state.action === 'stop') {
+      this.setState({
+        speed: 0
+      })
+    }
+
+    if (this.state.action === 'left') {
+      this.setState({
+        vx: -1 * this.state.speed,
         vy: 0,
-      });
-    };
-
-    //Left arrow key `release` method
-    left.release = () => {
-      //If the left arrow has been released, and the right arrow isn't down,
-      //and the cat isn't moving vertically:
-      //Stop the cat
-      if (!right.isDown && this.state.vy === 0) {
-        this.setState({ vx: 0 });
-      }
-    };
-
-    //Up
-    up.press = () => {
+        rotation: Math.PI * 2 * (1/2)
+      })
+    }
+    if (this.state.action === 'up') {
       this.setState({
-        vy: -5,
+        vy: -1 * this.state.speed,
         vx: 0,
-      });
-    };
-    up.release = () => {
-      if (!down.isDown && this.state.vx === 0) {
-        this.setState({ vy: 0 });
-      }
-    };
-
-    //Right
-    right.press = () => {
+        rotation: Math.PI * 2 * (3/4)
+      })
+    }
+    if (this.state.action === 'right') {
       this.setState({
-        vx: 5,
+        vx: 1 * this.state.speed,
         vy: 0,
-      });
-    };
-    right.release = () => {
-      if (!left.isDown && this.state.vy === 0) {
-        this.setState({ vx: 0 });
-      }
-    };
+        rotation: 0
+      })
+    }
 
-    //Down
-    down.press = () => {
+    if (this.state.action === 'down') {
       this.setState({
-        vy: 5,
+        vy: 1 * this.state.speed,
         vx: 0,
-      });
-    };
-    down.release = () => {
-      if (!up.isDown && this.state.vx === 0) {
-        this.setState({
-          vy: 0,
-        });
-      }
-    };
+        rotation: Math.PI * 2 * (1/4)
+      })
+    }
+    // Changes XY Coordinates
     this.setState((prevState) => ({
       x: (prevState.x += prevState.vx),
       y: (prevState.y += prevState.vy),
     }));
+    // left.press = () => {
+    //   //Change the velocity when the key is pressed
+    //   this.setState({
+    //     vx: -5,
+    //     vy: 0,
+    //   });
+    // };
+
+    // //Left arrow key `release` method
+    // left.release = () => {
+    //   //If the left arrow has been released, and the right arrow isn't down,
+    //   //and the cat isn't moving vertically:
+    //   //Stop the cat
+    //   if (!right.isDown && this.state.vy === 0) {
+    //     this.setState({ vx: 0 });
+    //   }
+    // };
+
+    //Up
+
+    // up.press = () => {
+    //   this.setState({
+    //     vy: -5,
+    //     vx: 0,
+    //   });
+    // };
+    // up.release = () => {
+    //   if (!down.isDown && this.state.vx === 0) {
+    //     this.setState({ vy: 0 });
+    //   }
+    // };
+
+    //Right
+
+    // right.press = () => {
+    //   this.setState({
+    //     vx: 5,
+    //     vy: 0,
+    //   });
+    // };
+    // right.release = () => {
+    //   if (!left.isDown && this.state.vy === 0) {
+    //     this.setState({ vx: 0 });
+    //   }
+    // };
+
+    //Down
+
+  //   down.press = () => {
+  //     this.setState({
+  //       vy: 5,
+  //       vx: 0,
+  //     });
+  //   };
+  //   down.release = () => {
+  //     if (!up.isDown && this.state.vx === 0) {
+  //       this.setState({
+  //         vy: 0,
+  //       });
+  //     }
+  //   };
+    // this.setState((prevState) => ({
+    //   x: (prevState.x += prevState.vx),
+    //   y: (prevState.y += prevState.vy),
+    // }));
   };
 
   keyboard(value) {
@@ -151,8 +225,9 @@ class Game extends Component {
     return (
       <Car
         {...this.props}
-        x={this.state.x}
-        y={this.state.y}
+        {...this.state}
+        // x={this.state.x}
+        // y={this.state.y}
         // rotation={this.state.rotation}
       />
     );

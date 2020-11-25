@@ -1,12 +1,13 @@
 import * as tf from '@tensorflow/tfjs';
 import * as speechCommands from '@tensorflow-models/speech-commands'
 
+let recognizer;
 let words;
 const wordList = [];
 
-export function loadModel() {
-  const recognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
-
+export async function loadModel() {
+  recognizer = speechCommands.create('BROWSER_FFT', '18w');
+  // directional4w
   await recognizer.ensureModelLoaded();
   // Make sure that the underlying model and metadata are loaded via HTTPS
   // requests.
@@ -21,19 +22,21 @@ export function loadModel() {
 //    - includeSpectrogram
 //    - probabilityThreshold
 //    - includeEmbedding
-export function startListening() {
+export function startListening(callback) {
   recognizer.listen(({scores}) => {
     scores = Array.from(scores).map((s, i) => ({score: s, word: words[i]}));
 
     // After that we sort the array by scode descending
     scores.sort((s1, s2) => s2.score - s1.score);
 
+    let command = scores[0].word
+    callback(command)
     // - result.scores contains the probability scores that correspond to
     //   recognizer.wordLabels().
     // - result.spectrogram contains the spectrogram of the recognized word.
   }, {
     includeSpectrogram: true,
-    probabilityThreshold: 0.75
+    probabilityThreshold: 0.9
   });
 }
 
