@@ -1,10 +1,14 @@
+import React from 'react'
 import logo from './logo.svg';
+import Scene from './pixi/Scene';
 import './App.css';
+import firebase from './firebase'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Scene />
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +21,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
