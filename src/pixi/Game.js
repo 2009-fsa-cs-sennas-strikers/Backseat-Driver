@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withApp } from 'react-pixi-fiber';
 import Car from './Car';
 import {loadModel, startListening} from '../tenserFlow'
-import { math } from '@tensorflow/tfjs';
 
 // http://pixijs.io/examples/#/basics/basic.js
 class Game extends Component {
