@@ -1,6 +1,7 @@
 import React from 'react';
+// import * as PIXI from 'pixi.js';
 import { Stage } from 'react-pixi-fiber';
-import RotatingBunny from './Game';
+import Game from './Game';
 
 const options = {
   backgroundColor: 0x1099bb,
@@ -14,14 +15,9 @@ const options = {
 const Scene = (props) => {
   return (
     <Stage options={options}>
-      <RotatingBunny />
+      <Game />
     </Stage>
   );
 };
-
-// app.renderer.view.style.position = "absolute";
-// app.renderer.view.style.display = "block";
-// app.renderer.autoResize = true;
-// app.renderer.resize(window.innerWidth, window.innerHeight);
 
 export default Scene;
