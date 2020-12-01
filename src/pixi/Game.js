@@ -6,27 +6,27 @@ import { loadModel, startListening } from '../tenserFlow';
 
 // http://pixijs.io/examples/#/basics/basic.js
 class Game extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       rotation: 0,
       vx: 0,
       vy: 0,
-      x: 300,
-      y: 400,
+      x: 400,
+      y: 300,
       speed: 0,
-      action: '',
+      // action: '',
     };
-    this.voiceAction = this.voiceAction.bind(this);
+    // this.voiceAction = this.voiceAction.bind(this);
     this.contain = this.contain.bind(this);
   }
 
-  voiceAction(command) {
-    this.setState({
-      action: command,
-    });
-    console.log('pixi game command:', this.state.action);
-  }
+  // voiceAction(command) {
+  //   this.setState({
+  //     action: command,
+  //   });
+  //   console.log('pixi game command:', this.state.action);
+  // }
 
   componentDidMount() {
     //passed down through Stage component
@@ -151,98 +151,98 @@ class Game extends Component {
     //   });
     // }
 
-    // if (this.state.action === 'left') {
-    //   this.setState({
-    //     vx: -3,
-    //     vy: 0,
-    //     rotation: Math.PI * 2 * (3 / 4),
-    //   });
-    // }
-    // if (this.state.action === 'up') {
-    //   this.setState({
-    //     vy: -3,
-    //     vx: 0,
-    //     rotation: 0,
-    //   });
-    // }
-    // if (this.state.action === 'right') {
-    //   this.setState({
-    //     vx: 3,
-    //     vy: 0,
-    //     rotation: Math.PI * 2 * (1 / 4),
-    //   });
-    // }
-    // if (this.state.action === 'down') {
-    //   this.setState({
-    //     vy: 3,
-    //     vx: 0,
-    //     rotation: Math.PI * 2 * (1 / 2),
-    //   });
-    // }
+    if (this.props.action === 'left') {
+      this.setState({
+        vx: -3,
+        vy: 0,
+        rotation: Math.PI * 2 * (3 / 4),
+      });
+    }
+    if (this.props.action === 'up') {
+      this.setState({
+        vy: -3,
+        vx: 0,
+        rotation: 0,
+      });
+    }
+    if (this.props.action === 'right') {
+      this.setState({
+        vx: 3,
+        vy: 0,
+        rotation: Math.PI * 2 * (1 / 4),
+      });
+    }
+    if (this.props.action === 'down') {
+      this.setState({
+        vy: 3,
+        vx: 0,
+        rotation: Math.PI * 2 * (1 / 2),
+      });
+    }
 
     // Capture the keyboard arrow keys
-    let left = this.keyboard('ArrowLeft'),
-      up = this.keyboard('ArrowUp'),
-      right = this.keyboard('ArrowRight'),
-      down = this.keyboard('ArrowDown');
+    // let left = this.keyboard('ArrowLeft'),
+    //   up = this.keyboard('ArrowUp'),
+    //   right = this.keyboard('ArrowRight'),
+    //   down = this.keyboard('ArrowDown');
 
-    left.press = () => {
-      //Change the velocity when the key is pressed
+    // left.press = () => {
+    //   //Change the velocity when the key is pressed
 
-      this.setState({
-        vx: -5,
-        vy: 0,
-      });
-    };
+    //   this.setState({
+    //     vx: -5,
+    //     vy: 0,
+    //   });
+    // };
 
-    //Left arrow key `release` method
-    left.release = () => {
-      //If the left arrow has been released, and the right arrow isn't down,
-      //and the cat isn't moving vertically:
-      //Stop the cat
-      if (!right.isDown && this.state.vy === 0) {
-        this.setState({ vx: 0 });
-      }
-    };
+    // //Left arrow key `release` method
+    // left.release = () => {
+    //   //If the left arrow has been released, and the right arrow isn't down,
+    //   //and the cat isn't moving vertically:
+    //   //Stop the cat
+    //   if (!right.isDown && this.state.vy === 0) {
+    //     this.setState({ vx: 0 });
+    //   }
+    // };
 
-    up.press = () => {
-      this.setState({
-        vy: -5,
-        vx: 0,
-      });
-    };
+    // up.press = () => {
+    //   this.setState({
+    //     vy: -5,
+    //     vx: 0,
+    //   });
+    // };
 
-    up.release = () => {
-      if (!down.isDown && this.state.vx === 0) {
-        this.setState({ vy: 0 });
-      }
-    };
+    // up.release = () => {
+    //   if (!down.isDown && this.state.vx === 0) {
+    //     this.setState({ vy: 0 });
+    //   }
+    // };
 
-    right.press = () => {
-      this.setState({
-        vx: 5,
-        vy: 0,
-      });
-    };
-    right.release = () => {
-      if (!left.isDown && this.state.vy === 0) {
-        this.setState({ vx: 0 });
-      }
-    };
+    // right.press = () => {
+    //   this.setState({
+    //     vx: 5,
+    //     vy: 0,
+    //   });
+    // };
+    // right.release = () => {
+    //   if (!left.isDown && this.state.vy === 0) {
+    //     this.setState({ vx: 0 });
+    //   }
+    // };
 
-    down.press = () => {
-      this.setState({
-        vy: 5,
-        vx: 0,
-      });
-    };
-    down.release = () => {
-      if (!up.isDown && this.state.vx === 0) {
-        this.setState({
-          vy: 0,
-        });
-      }
-    };
+    // down.press = () => {
+    //   this.setState({
+    //     vy: 5,
+    //     vx: 0,
+    //   });
+    // };
+    // down.release = () => {
+    //   if (!up.isDown && this.state.vx === 0) {
+    //     this.setState({
+    //       vy: 0,
+    //     });
+    //   }
+    // };
 
     this.setState((prevState) => ({
       x: (prevState.x += prevState.vx),

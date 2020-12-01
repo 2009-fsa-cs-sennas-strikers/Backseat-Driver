@@ -1,8 +1,15 @@
-/* .App {
+ .pixi {
   text-align: center;
   margin: 0 auto;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 100;
+  width: 50vw;
+  height: 50vh;
+  opacity: 50%;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
