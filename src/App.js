@@ -1,29 +1,42 @@
-import React from 'react'
-import logo from './logo.svg';
+import React, { Suspense, useState, useRef } from 'react'
+import * as THREE from 'three'
+import { Canvas } from 'react-three-fiber'
+import {OrbitControls, Stars} from 'drei'
+import {Physics} from 'use-cannon'
+import Car from './ThreeJs/Car'
+import Box from './ThreeJs/Box'
+import Plane from './ThreeJs/PlaneofExistence'
 import Scene from './pixi/Scene';
 import './App.css';
 import firebase from './firebase'
 
-function App() {
+
+
+function App() {  
+  const [position, setPosition] = useState({x:1, y:0, z:0})
+  const {x,y,z} = position
   return (
-    <div className="App">
-      <Scene />
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
-  );
+    <>
+     <div className="controls">
+        
+      </div>
+      <Canvas>
+        <OrbitControls />
+        <Stars />
+        <ambientLight intensity={0.5} />
+        <spotLight intensity={0.8} position={[300, 300, 400]} />
+        <Physics >
+        <Suspense fallback={<Box />}>{<Car x={x} y={y} z={z} />}</Suspense>
+        <Plane />
+        </Physics >
+      </Canvas>
+      <div className="App">
+        <Scene />
+      </div>
+    </>
+  )
+
+
 }
 
-export default App;
+export default App
