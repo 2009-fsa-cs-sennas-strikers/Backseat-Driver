@@ -15,7 +15,7 @@ const options = {
 const Scene = (props) => {
   return (
     <Stage options={options}>
-      <Game />
+      <Game vHeight={options.height} vWidth={options.width} action={props.action}/>
     </Stage>
   );
 };
