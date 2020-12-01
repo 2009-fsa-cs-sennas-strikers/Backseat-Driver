@@ -6,6 +6,9 @@ import {Physics} from 'use-cannon'
 import Car from './ThreeJs/Car'
 import Box from './ThreeJs/Box'
 import Plane from './ThreeJs/PlaneofExistence'
+import Scene from './pixi/Scene';
+import './App.css';
+import firebase from './firebase'
 
 
 
@@ -27,8 +30,13 @@ function App() {
         <Plane />
         </Physics >
       </Canvas>
+      <div className="App">
+        <Scene />
+      </div>
     </>
   )
+
+
 }
 
 export default App
