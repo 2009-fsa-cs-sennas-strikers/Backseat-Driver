@@ -1,16 +1,17 @@
 import React, { Suspense, useState, useRef } from 'react'
+import * as THREE from 'three'
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {OrbitControls, Stars} from 'drei'
 import {Physics, usePlane, useBox} from 'use-cannon'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import car from './models/models/McLaren.glb'
 
-function Car(props) {
-  const [ref, api] = useBox(() => ({ mass:1, position: [0,0.075,0]}))
+const Car = ({x,y,z}) => {
+  const carRef = useRef()
   const gltf = useLoader(GLTFLoader, car)
-  return <primitive onClick={() => {
-    api.position.set(1,0,0)
-  }} ref={ref} object={gltf.scene} scale={[10,10,10]} position={[0, 0, 0]} />
+  const vec = new THREE.Vector3(x,y,z)
+useFrame(() => carRef.current.position.lerp(vec, 0.1));
+  return <primitive ref={carRef} object={gltf.scene} scale={[10,10,10]} position={[0, 0, 0]} />
 }
 
 function Box() {
@@ -37,15 +38,37 @@ function Plane(props){
 
 
 function App() {  
+  const [position, setPosition] = useState({x:1, y:0, z:0})
+  const {x,y,z} = position
   return (
     <>
+     <div className="controls">
+        <label>x</label>
+        <input
+          onChange={(e) => setPosition({ ...position, x: e.target.value })}
+          value={position.x}
+          type="number"
+        />
+        <label>y</label>
+        <input
+          onChange={(e) => setPosition({ ...position, y: e.target.value })}
+          value={position.y}
+          type="number"
+        />
+        <label>z</label>
+        <input
+          onChange={(e) => setPosition({ ...position, z: e.target.value })}
+          value={position.z}
+          type="number"
+        />
+      </div>
       <Canvas>
         <OrbitControls />
         <Stars />
         <ambientLight intensity={0.5} />
         <spotLight intensity={0.8} position={[300, 300, 400]} />
         <Physics >
-        <Suspense fallback={<Box />}>{<Car />}</Suspense>
+        <Suspense fallback={<Box />}>{<Car x={x} y={y} z={z} />}</Suspense>
         <Plane />
         </Physics >
       </Canvas>

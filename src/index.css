@@ -23,3 +23,28 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
     segoe ui, arial, sans-serif;
 }
+
+.controls {
+  display: flex;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.controls input {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  margin: 0 1rem;
+  width: 60px;
+}
+
+.controls label {
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: palevioletred;
+  padding: 0.4rem;
+  margin: 0.1rem;
+}
