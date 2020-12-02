@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useRef } from 'react'
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
-import {OrbitControls, Stars} from 'drei'
+import { OrbitControls, Stars} from 'drei'
 import {Physics} from 'use-cannon'
 import Car from './ThreeJs/Car'
 import Box from './ThreeJs/Box'
@@ -12,6 +12,7 @@ import firebase from './firebase'
 import { loadModel, startListening } from './tenserFlow'
 import { Stage } from 'react-pixi-fiber'
 import Game from './pixi/Game'
+import Viewport from './ThreeJs/Viewport'
 
 const options = {
   backgroundColor: 0x1099bb,
@@ -48,13 +49,13 @@ class App extends React.Component{
   render() {
   return (
     <>
-      <div className="pixi">
+      {/* <div className="pixi">
         <Stage options={options}>
           <Game vHeight={options.height} vWidth={options.width} action={this.state.action}/>
         </Stage>
-      </div>
+      </div> */}
       <Canvas>
-        <OrbitControls />
+        
         <Stars />
         <ambientLight intensity={0.5} />
         <spotLight intensity={0.8} position={[300, 300, 400]} />
@@ -62,6 +63,8 @@ class App extends React.Component{
         <Suspense fallback={<Box />}>{<Car action={this.state.action}/>}</Suspense>
         <Plane />
         </Physics >
+        {/*<OrbitControls /> */}
+        <Viewport />
       </Canvas>
     </>
   )
