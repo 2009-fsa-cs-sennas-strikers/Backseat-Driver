@@ -13,6 +13,7 @@ import { loadModel, startListening } from './tenserFlow'
 import { Stage } from 'react-pixi-fiber'
 import Game from './pixi/Game'
 import Viewport from './ThreeJs/Viewport'
+import Block from './ThreeJs/Block'
 
 const options = {
   backgroundColor: 0x1099bb,
@@ -55,15 +56,19 @@ class App extends React.Component{
         </Stage>
       </div> */}
       <Canvas>
-        
         <Stars />
         <ambientLight intensity={0.5} />
-        <spotLight intensity={0.8} position={[300, 300, 400]} />
+        <spotLight castShadow intensity={1.5} position={[300, 300, 400]} />
         <Physics >
-        <Suspense fallback={<Box />}>{<Car action={this.state.action}/>}</Suspense>
-        <Plane />
+          <Plane />
+          <Suspense fallback={<Box />}>{<Car action={this.state.action}/>}</Suspense>
+          <Block position={[-25,0,0]}/>
+          <Block position={[-25,0,0]}/>
+          <Block position={[-25,0,0]}/>
+          <Block position={[-25,0,0]}/>
+          <Block position={[-25,0,0]}/>
         </Physics >
-        {/*<OrbitControls /> */}
+        <OrbitControls />
         <Viewport />
       </Canvas>
     </>
