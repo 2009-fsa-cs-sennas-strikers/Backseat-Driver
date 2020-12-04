@@ -14,6 +14,8 @@ import { Stage } from 'react-pixi-fiber'
 import Game from './pixi/Game'
 import Viewport from './ThreeJs/Viewport'
 import Block from './ThreeJs/Block'
+import BlockK from './ThreeJs/BlockK'
+import SidePlane from './ThreeJs/SidePlane'
 
 const options = {
   backgroundColor: 0x1099bb,
@@ -50,23 +52,27 @@ class App extends React.Component{
   render() {
   return (
     <>
-      {/* <div className="pixi">
-        <Stage options={options}>
-          <Game vHeight={options.height} vWidth={options.width} action={this.state.action}/>
-        </Stage>
-      </div> */}
       <Canvas>
         <Stars />
         <ambientLight intensity={0.5} />
         <spotLight castShadow intensity={1.5} position={[300, 300, 400]} />
         <Physics >
-          <Plane />
+          <Plane rotation={[-(Math.PI/2), 0, 0]} />
           <Suspense fallback={<Box />}>{<Car action={this.state.action}/>}</Suspense>
-          <Block position={[-25,0,0]}/>
-          <Block position={[-25,0,0]}/>
-          <Block position={[-25,0,0]}/>
-          <Block position={[-25,0,0]}/>
-          <Block position={[-25,0,0]}/>
+          <Block position={[-25,2.5,0]}/>
+          <Block position={[-20,2.5,0]}/>
+          <Block position={[-15,2.5,0]}/>
+          <Block position={[-10,2.5,0]}/>
+          <Block position={[-5,2.5,0]}/>
+          <BlockK position={[25,2.5,0]}/>
+          <BlockK position={[20,2.5,0]}/>
+          <BlockK position={[15,2.5,0]}/>
+          <BlockK position={[10,2.5,0]}/>
+          <BlockK position={[5,2.5,0]}/>
+          <SidePlane position={[0,0,-50]} />
+          <SidePlane rotation={[0,Math.PI,0]} position={[0,0, 50]} />
+          <SidePlane rotation={[0,-Math.PI/2,0]} position={[50,0,0]} />
+          <SidePlane rotation={[0,Math.PI/2,0]} position={[-50,0,0]} />
         </Physics >
         <OrbitControls />
         <Viewport />

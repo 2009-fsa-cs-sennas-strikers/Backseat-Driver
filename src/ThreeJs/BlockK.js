@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { useBox } from 'use-cannon'
 
-const Block = (props) => {
+const BlockK = (props) => {
   // const blockRef = useRef()
-  const [blockRef, api] = useBox(() => ({type: 'Kinematic', args:[5,5,5], ...props}))
+  const [blockRef, api] = useBox(() => ({mass:1, args:[5,5,5], ...props}))
     return (
       <mesh ref={blockRef}>
         <boxBufferGeometry attach="geometry" args={[5,5,5]} />
@@ -13,4 +13,4 @@ const Block = (props) => {
     )
   }
 
-export default Block
+export default BlockK
