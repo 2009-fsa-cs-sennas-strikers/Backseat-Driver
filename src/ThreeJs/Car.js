@@ -58,42 +58,50 @@ const Car = (props) => {
   const {x,y,z} = position
   //carRef = three car in scene
   //api = car's physics object
-    const [carRef, api] = useBox(() => ({mass:0.5}))
+    const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], ...props}))
     // const carRef = useRef()
     const gltf = useLoader(GLTFLoader, car)
-
+    
     const vec = new THREE.Vector3(x,y,z)
-
-    console.log('car model', gltf)
+    
+    // console.log('car model', gltf)
     console.log('carref', carRef)
     console.log('api', api)
-  useFrame(() => {
+    
+    // console.log('velocity', api.velocity)
+  useFrame((state) => {
+    api.velocity.set(0,0,0)
     if (props.action === 'right' && x < 500) {
-      api.velocity.set(15,0,0);
-      api.rotation.set(0, (Math.PI * 135/180), 0)
+      api.velocity.set(15,y,0);
+      api.rotation.set(0, (Math.PI * 180/180), 0)
     }
     if (props.action === 'left' && x > -500) {
-      api.velocity.set(-15,0,0);
-      api.rotation.set(0, (Math.PI * -45/180), 0)
+      api.velocity.set(-15,y,0);
+      api.rotation.set(0, (Math.PI * -0/180), 0)
     }
     if (props.action === 'up' && z > -500) {
       api.velocity.set(0,0,-15);
-      api.rotation.set(0, (Math.PI * 225/180), 0)
+      api.rotation.set(0, (Math.PI * -90/180), 0)
     }
     if (props.action === 'down' && z < 500) {
       api.velocity.set(0,0,15);
-      api.rotation.set(0, (Math.PI * 45/180), 0)
+      api.rotation.set(0, (Math.PI * 90/180), 0)
     }
-    carRef.current.position.lerp(vec, 0.1)
+    // carRef.current.position.lerp(vec, 0.1)
 
     // carRef.current.rotation.x = lerp(carRef.current.rotation.x, (Math.PI / 2), 0.1)
   });
+  
     return (
-      
+
       <>
-    <PerspectiveCamera position={[position.x/10,0.1,position.z/10]} makeDefault={true} />
-    <primitive ref={carRef} object={gltf.scene} scale={[10,10,10]} position={[0, 1, 0]} rotation={ [ 0, (Math.PI * -45/180), 0 ]} />
-    {/* <OrbitControls screenSpacePanning /> */}
+    {/* <PerspectiveCamera position={[position.x/10,0.1,position.z/10]} makeDefault={true} /> */}
+    <mesh ref={carRef} position={position}>
+      <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} />
+        <primitive object={gltf.scene} scale={[10,10,10]} position={[1.8, 0, -1.825]} rotation={ [ 0, (Math.PI * -45/180), 0 ]} />
+        <meshStandardMaterial wireframe={true} attach="material" />
+        {/* <OrbitControls screenSpacePanning /> */}
+    </mesh>
     </>
     )
   }
