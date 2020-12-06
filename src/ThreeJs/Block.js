@@ -2,13 +2,16 @@ import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { useBox } from 'use-cannon'
 
+// Made the block 30 length x 30 width x 10 height
+// Allocated 20length "streets between each block"
+
 const Block = (props) => {
   // const blockRef = useRef()
-  const [blockRef, api] = useBox(() => ({type: 'Kinematic', args:[5,5,5], ...props}))
+  const [blockRef, api] = useBox(() => ({type: 'Kinematic', args:[30,10,30], ...props}))
     return (
       <mesh ref={blockRef}>
-        <boxBufferGeometry attach="geometry" args={[5,5,5]} />
-        <meshStandardMaterial wireframe={true} attach="material" transparent opacity={1} />
+        <boxBufferGeometry attach="geometry" args={[30,10,30]} />
+        <meshStandardMaterial wireframe={false} attach="material" transparent opacity={1} />
       </mesh>
     )
   }

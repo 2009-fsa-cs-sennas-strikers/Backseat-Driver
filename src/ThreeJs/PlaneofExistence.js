@@ -8,10 +8,10 @@ const Plane = (props) => {
       mass: 0,
       ...props
     }))
-    
+
     return (
       <mesh ref={planeRef}>
-        <planeBufferGeometry attach="geometry" args={[100, 100]} />
+        <planeBufferGeometry attach="geometry" args={[300, 300]} />
         <meshStandardMaterial attach="material" color="black" />
       </mesh>
     )

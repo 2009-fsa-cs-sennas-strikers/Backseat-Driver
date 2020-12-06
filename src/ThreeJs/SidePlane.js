@@ -11,8 +11,8 @@ const SidePlane = (props) => {
 
     return (
       <mesh ref={planeRef}>
-        <planeBufferGeometry attach="geometry" args={[0, 0]} />
-        <meshStandardMaterial attach="material" />
+        <planeBufferGeometry attach="geometry" args={[300, 150]} />
+        <meshStandardMaterial attach="material" transparent={true} opacity={0}/>
       </mesh>
     )
 

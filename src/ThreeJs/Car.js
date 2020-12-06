@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { useBox } from 'use-cannon'
 import car from '../models/models/McLaren.glb'
 import lerp from 'lerp'
-import {PerspectiveCamera, OrbitControls, draco} from 'drei'
+import { PerspectiveCamera, PointerLockControls } from 'drei'
 
 function keyboard(value) {
   let key = {};
@@ -64,7 +64,7 @@ const Car = (props) => {
     // console.log('carref', carRef)
     // console.log('api', api)
   const cameraRef = useRef()
-
+  console.log('api', api)
   useFrame(() => {
     api.velocity.set(0,0,0)
     if (props.action === 'right') {
@@ -94,7 +94,7 @@ const Car = (props) => {
         <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} />
           <primitive object={gltf.scene} scale={[10,10,10]} position={[1.8, 0, -1.825]} rotation={ [ 0, (Math.PI * -45/180), 0 ]} />
           <meshStandardMaterial wireframe={true} attach="material" />
-          {/* <OrbitControls/> */}
+          <PointerLockControls/>
       </mesh>
     </>
     )
