@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useFrame } from "react-three-fiber";
 import { OrthographicCamera } from "@react-three/drei";
 
-const Minimap = (props) => {
+const MiniMap = (props) => {
   const miniMapCameraRef = useRef();
 
   const frustumSize = 500;

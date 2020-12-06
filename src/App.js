@@ -1,17 +1,13 @@
-import React, { Suspense, useState, useRef } from 'react'
-import * as THREE from 'three'
+import React, { Suspense, } from 'react'
 import { Canvas } from 'react-three-fiber'
-import { OrbitControls, Stars} from 'drei'
+import { Stars} from 'drei'
 import {Physics} from 'use-cannon'
 import Car from './ThreeJs/Car'
 import Box from './ThreeJs/Box'
 import Plane from './ThreeJs/PlaneofExistence'
-import Scene from './pixi/Scene';
 import './App.css';
 import firebase from './firebase'
 import { loadModel, startListening } from './tenserFlow'
-import { Stage } from 'react-pixi-fiber'
-import Game from './pixi/Game'
 import Viewport from './ThreeJs/Viewport'
 import Block from './ThreeJs/Block'
 import BlockK from './ThreeJs/BlockK'
@@ -47,8 +43,6 @@ class App extends React.Component{
     console.log('voice command:', this.state.action);
   }
 
-  // const [position, setPosition] = useState({x:1, y:0, z:0})
-  // const {x,y,z} = position
   render() {
   return (
     <>
@@ -74,7 +68,6 @@ class App extends React.Component{
           <SidePlane rotation={[0,-Math.PI/2,0]} position={[50,0,0]} />
           <SidePlane rotation={[0,Math.PI/2,0]} position={[-50,0,0]} />
         </Physics >
-        <OrbitControls />
         <Viewport />
       </Canvas>
     </>
