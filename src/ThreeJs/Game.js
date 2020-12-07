@@ -1,7 +1,7 @@
 import React, { Suspense, } from 'react'
 import { Canvas } from 'react-three-fiber'
 import { loadModel, startListening } from '../tenserFlow'
-import { Stars} from 'drei'
+import { Stars, OrbitControls} from 'drei'
 import {Physics} from 'use-cannon'
 import Car from './Car'
 import Box from './Box'
@@ -56,7 +56,7 @@ return (
   <SidePlane rotation={[0,-Math.PI/2,0]} position={[50,0,0]} />
   <SidePlane rotation={[0,Math.PI/2,0]} position={[-50,0,0]} />
 </Physics >
-<Viewport />
+{/*<Viewport />*/}
 </Canvas>
     )
 }

@@ -1,42 +1,27 @@
 import React from 'react'
 import firebase from './firebase'
-import { loadModel, startListening } from './tenserFlow'
 import Game from './ThreeJs/Game'
-
-const options = {
-  backgroundColor: 0x1099bb,
-  height: 600,
-  width: 800,
-  antialias: true, // default: false
-  transparent: false, // default: false
-  resolution: 1, // default: 1
-};
+import Title from './TitleScreen'
 
 class App extends React.Component{
-  constructor(props) {
-    super()
-    this.state = {
-      action: ''
+    constructor(){
+      super()
+      this.state = {
+        isPlaying: false
+      }
+      this.changePlaying = this.changePlaying.bind(this)
     }
-    this.voiceAction = this.voiceAction.bind(this)
-  }
+    changePlaying(){
+      this.setState({
+        isPlaying: true
+      })
+    }
 
-  componentDidMount() {
-    loadModel()
-    .then(() => startListening(this.voiceAction))
-  }
-
-  voiceAction(command) {
-    this.setState({
-      action: command,
-    });
-    console.log('voice command:', this.state.action);
-  }
 
   render() {
   return (
     <>
-    <Game />
+    {this.state.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>}
     </>
   )
   }

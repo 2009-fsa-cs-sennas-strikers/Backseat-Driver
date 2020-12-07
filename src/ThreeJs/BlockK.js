@@ -9,7 +9,6 @@ const BlockK = (props) => {
 
   // const blockRef = useRef()
   const [blockRef, api] = useBox(() => ({mass:1, args:[5,5,5], ...props}))
-  console.log(blockRef, api)
     return (
       <mesh ref={blockRef}>
         <boxBufferGeometry attach="geometry" args={[5,5,5]} />
