@@ -23,7 +23,7 @@ body,
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
-    segoe ui, arial, sans-serif;
+    segoe ui, aråial, sans-serif;
 }
 
 
@@ -51,6 +51,35 @@ body {
   padding: 0.4rem;
   margin: 0.1rem;
 }
+
+
+
+#stopwatch {
+  display: flex;
+
+  position: absolute;
+  color: white;
+  text-shadow: -2px 2px 5px white;
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
+  z-index: 10;
+  bottom: 50px;
+  left: 50px;
+  transform: skew(12deg,5deg);
+
+}
+
+#elapsed-time {
+  width: 320px;
+  font-size: 80px;
+  font-weight: 200;
+  margin: 0;
+}
+
+#elapsed-label {
+  width: 50px;
+  padding-left: 20px;
+  margin: 10x;
 
 canvas {
   width: 100%;
