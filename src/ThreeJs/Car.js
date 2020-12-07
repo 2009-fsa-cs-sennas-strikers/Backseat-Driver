@@ -59,7 +59,7 @@ const Car = (props) => {
   //api: car's physics object (methods to set/subscribe)
     const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], ...props}))
     const gltf = useLoader(GLTFLoader, car)
-
+    console.log(gltf)
     
   useFrame(() => {
     api.velocity.set(0,-10,0)
