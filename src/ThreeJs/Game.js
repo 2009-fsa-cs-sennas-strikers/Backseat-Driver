@@ -10,6 +10,7 @@ import Viewport from './Viewport'
 import Block from './Block'
 import BlockK from './BlockK'
 import SidePlane from './SidePlane'
+import Stopwatch from './Stopwatch'
 
 class Game extends React.Component{
     constructor(props) {
@@ -19,12 +20,12 @@ class Game extends React.Component{
         }
         this.voiceAction = this.voiceAction.bind(this)
       }
-    
+
       componentDidMount() {
         loadModel()
         .then(() => startListening(this.voiceAction))
       }
-    
+
       voiceAction(command) {
         this.setState({
           action: command,
@@ -34,6 +35,8 @@ class Game extends React.Component{
 
 render() {
 return (
+  <>
+   <Stopwatch />
    <Canvas>
         {/* <OrbitControls /> */}
         <Stars />
@@ -71,6 +74,7 @@ return (
         </Physics>
         <Viewport />
       </Canvas>
+      </>
     )
 }
 }
