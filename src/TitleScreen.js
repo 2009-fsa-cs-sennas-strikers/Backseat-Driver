@@ -9,7 +9,15 @@ class Title extends React.Component {
     
 
     render(){
-        return (<button onClick={() => this.props.changePlaying()}>Testing</button>)
+        return (<div id="home">
+        <div id="title">BackSeat Driver</div>
+        <button id="playButton" onClick={() => this.props.changePlaying()}>Testing</button>
+        <div id="github">
+            <a href="https://github.com/2009-fsa-cs-sennas-strikers/Backseat-Driver">
+                <img src="github.png"/>
+            </a>
+        </div>
+        </div>)
     }
 }
 
