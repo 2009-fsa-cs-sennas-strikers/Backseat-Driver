@@ -38,12 +38,6 @@ const Viewport = (props) => {
     );
 
     gl.setScissorTest(true);
-    // viewportRef.current.zoom = camera.zoom;
-    // viewportRef.current.position.x = camera.position.x;
-    // viewportRef.current.aspect = aspect;
-
-        // console.log("%o", camera);
-        // console.log("%o", viewportRef.current);
     viewportRef.current.position.y = 300;
     viewportRef.current.updateMatrixWorld();
     viewportRef.current.updateProjectionMatrix();
