@@ -10,26 +10,35 @@ import Viewport from './Viewport'
 import Block from './Block'
 import BlockK from './BlockK'
 import SidePlane from './SidePlane'
+import EndZone from './EndZone'
 
 class Game extends React.Component{
     constructor(props) {
-        super()
+        super(props)
         this.state = {
-          action: ''
+          action: '',
+          endPosition: {}
         }
-        this.voiceAction = this.voiceAction.bind(this)
+        this.voiceAction = this.voiceAction.bind(this);
+        this.updatePosition = this.updatePosition.bind(this);
       }
-    
+
       componentDidMount() {
         loadModel()
         .then(() => startListening(this.voiceAction))
       }
-    
+
       voiceAction(command) {
         this.setState({
           action: command,
         });
         console.log('voice command:', this.state.action);
+      }
+
+      updatePosition(endPosition) {
+        this.setState({
+          endPosition: endPosition
+        })
       }
 
 render() {
@@ -41,7 +50,24 @@ return (
         <spotLight castShadow intensity={1.5} position={[300, 300, 400]} />
         <Physics gravity={[0, -100, 0]}>
           <Plane rotation={[-(Math.PI/2), 0, 0]} />
-          <Suspense fallback={<Box />}>{<Car action={this.state.action}/>}</Suspense>
+          <Suspense fallback={<Box />}>
+          {<Car action={this.state.action} position={[0,0,100]} />}
+          </Suspense>
+          <EndZone position={[0,0,100]} />
+          {/* One Row */}
+          <Block position={[-125,5,100]}/>
+          <Block position={[-75,5,100]}/>
+          <Block position={[-25,5,100]}/>
+          <Block position={[25,5,100]}/>
+          <Block position={[75,5,100]}/>
+          <Block position={[125,5,100]}/>
+          {/* One Row */}
+          <Block position={[-125,5,50]}/>
+          <Block position={[-75,5,50]}/>
+          <Block position={[-25,5,50]}/>
+          <Block position={[25,5,50]}/>
+          <Block position={[75,5,50]}/>
+          <Block position={[125,5,50]}/>
           {/* One Row */}
           <Block position={[-125,5,0]}/>
           <Block position={[-75,5,0]}/>
@@ -64,12 +90,19 @@ return (
           <Block position={[75,5,-50]}/>
           <Block position={[125,5,-50]}/>
           {/* One Row */}
+          <Block position={[-125,5,-100]}/>
+          <Block position={[-75,5,-100]}/>
+          <Block position={[-25,5,-100]}/>
+          <Block position={[25,5,-100]}/>
+          <Block position={[75,5,-100]}/>
+          <Block position={[125,5,-100]}/>
+          {/* One Row */}
           <SidePlane position={[0,0,-150]} />
           <SidePlane rotation={[0,Math.PI,0]} position={[0,0, 150]} />
           <SidePlane rotation={[0,-Math.PI/2,0]} position={[150,0,0]} />
           <SidePlane rotation={[0,Math.PI/2,0]} position={[-150,0,0]} />
         </Physics>
-        <Viewport />
+        {/* <Viewport /> */}
       </Canvas>
     )
 }

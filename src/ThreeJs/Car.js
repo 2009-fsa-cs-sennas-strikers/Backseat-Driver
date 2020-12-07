@@ -6,6 +6,7 @@ import { useBox } from 'use-cannon'
 import car from '../models/models/McLaren.glb'
 import lerp from 'lerp'
 import { PerspectiveCamera, PointerLockControls } from 'drei'
+import Viewport from './Viewport'
 
 function keyboard(value) {
   let key = {};
@@ -50,8 +51,6 @@ function keyboard(value) {
   return key;
 }
 
-
-
 const Car = (props) => {
   // position from state (unused)
 
@@ -59,17 +58,28 @@ const Car = (props) => {
   //api: car's physics object (methods to set/subscribe)
     const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], ...props}))
     const gltf = useLoader(GLTFLoader, car)
+    let carPosition;
+    if (carRef.current) {
+    carPosition = carRef.current.position
+    console.log(carPosition)
+    }
 
-    
+
   useFrame(() => {
+    if (carPosition.x >= -10 && carPosition.x <= 10) {
+      if (carPosition.z <= -90 && carPosition.z >= -110) {
+      console.log('You win')
+      }
+    }
+
     api.velocity.set(0,-10,0)
     if (props.action === 'right') {
-     api.velocity.set(25,-10,0);
+     api.velocity.set(45,-10,0);
       api.rotation.set(0, (Math.PI * 180/180), 0)
     }
     if (props.action === 'left') {
-     
-      api.velocity.set(-25,-10,0);
+
+      api.velocity.set(-45,-10,0);
       api.rotation.set(0, (Math.PI * 0/180), 0)
     }
     if (props.action === 'up') {
@@ -81,7 +91,6 @@ const Car = (props) => {
       api.rotation.set(0, (Math.PI * 90/180), 0)
     }
   })
-
   return (
 
     <>
@@ -93,6 +102,7 @@ const Car = (props) => {
           <meshStandardMaterial wireframe={true} attach="material" />
           <PointerLockControls/>
       </mesh>
+      <Viewport carPosition={carPosition}/>
     </>
     )
   }

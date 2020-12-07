@@ -4,9 +4,8 @@ import {OrthographicCamera} from 'drei'
 
 const Viewport = (props) => {
   const viewportRef = useRef()
-
-  const frustumSize = 500;
-  const aspect = window.innerWidth/ window.innerHeight
+  const frustumSize = 800;
+  // const aspect = window.innerWidth/ window.innerHeight
 
   const miniMapLocationLeftPixels =
   window.innerWidth - 8 - window.innerWidth * 0.2;
@@ -38,7 +37,9 @@ const Viewport = (props) => {
     );
 
     gl.setScissorTest(true);
+    viewportRef.current.position.x = props.carPosition.x;
     viewportRef.current.position.y = 300;
+    viewportRef.current.position.z = props.carPosition.z;
     viewportRef.current.updateMatrixWorld();
     viewportRef.current.updateProjectionMatrix();
     gl.render(scene, viewportRef.current);
@@ -50,8 +51,8 @@ const Viewport = (props) => {
       ref={viewportRef}
       zoom = {4.5}
       rotation={[Math.PI*-90/180, 0, 0]}
-      left={(frustumSize * aspect) / -2}
-      right={(frustumSize * aspect) / 2}
+      left={frustumSize / -2}
+      right={frustumSize / 2}
       top={frustumSize / 2}
       bottom={frustumSize / -2}
       far={500}
