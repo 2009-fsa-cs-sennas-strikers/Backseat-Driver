@@ -35,6 +35,8 @@ class Game extends React.Component{
         console.log('voice command:', this.state.action);
       }
 
+      // function to pass EndZone Position
+      // up to parent as props
       updatePosition(endPosition) {
         this.setState({
           endPosition: endPosition
@@ -53,7 +55,7 @@ return (
           <Suspense fallback={<Box />}>
           {<Car action={this.state.action} position={[0,0,100]} />}
           </Suspense>
-          <EndZone position={[0,0,100]} />
+          <EndZone />
           {/* One Row */}
           <Block position={[-125,5,100]}/>
           <Block position={[-75,5,100]}/>

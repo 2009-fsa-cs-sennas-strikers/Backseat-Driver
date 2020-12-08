@@ -3,12 +3,11 @@ import * as THREE from 'three';
 // import { useBox } from 'use-cannon'
 
 const EndZone = (props) => {
-  // const blockRef = useRef()
   const zoneRef = useRef();
-  if (zoneRef.current) {
-    console.log('zoneRef', zoneRef.current.position)
-  //   props.updatePosition(zoneRef.current.position)
-  }
+  // if (zoneRef.current) {
+    // console.log('zoneRef', zoneRef.current.position)
+    // props.updatePosition(zoneRef.current.position)
+  // }
   return (
     <mesh ref={zoneRef} position={[0,0,-100]}>
       <boxBufferGeometry attach="geometry" args={[20,100,20]}/>

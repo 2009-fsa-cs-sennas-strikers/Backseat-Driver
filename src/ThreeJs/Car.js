@@ -58,20 +58,16 @@ const Car = (props) => {
   //api: car's physics object (methods to set/subscribe)
     const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], ...props}))
     const gltf = useLoader(GLTFLoader, car)
+
     let carPosition;
     if (carRef.current) {
     carPosition = carRef.current.position
-    console.log(carPosition)
     }
-
 
   useFrame(() => {
-    if (carPosition.x >= -10 && carPosition.x <= 10) {
-      if (carPosition.z <= -90 && carPosition.z >= -110) {
+    if (carPosition.x >= -10 && carPosition.x <= 10 && carPosition.z >= -110 && carPosition.z <= -90) {
       console.log('You win')
-      }
     }
-
     api.velocity.set(0,-10,0)
     if (props.action === 'right') {
      api.velocity.set(45,-10,0);
@@ -92,9 +88,7 @@ const Car = (props) => {
     }
   })
   return (
-
     <>
-
       <mesh ref={carRef}>
         <PerspectiveCamera position={[0.7,0.35,0]} rotation={[0, Math.PI*90/180, 0]} makeDefault={true} />
         <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} />
@@ -106,6 +100,5 @@ const Car = (props) => {
     </>
     )
   }
-
 
 export default Car
