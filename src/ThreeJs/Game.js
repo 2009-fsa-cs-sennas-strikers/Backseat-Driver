@@ -11,6 +11,7 @@ import Block from './Block'
 import BlockK from './BlockK'
 import SidePlane from './SidePlane'
 import EndZone from './EndZone'
+import Stopwatch from './Stopwatch'
 
 class Game extends React.Component{
     constructor(props) {
@@ -45,6 +46,8 @@ class Game extends React.Component{
 
 render() {
 return (
+  <>
+   <Stopwatch />
    <Canvas>
         {/* <OrbitControls /> */}
         <Stars />
@@ -106,6 +109,7 @@ return (
         </Physics>
         {/* <Viewport /> */}
       </Canvas>
+      </>
     )
 }
 }

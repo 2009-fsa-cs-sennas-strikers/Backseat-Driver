@@ -70,20 +70,19 @@ const Car = (props) => {
     }
     api.velocity.set(0,-10,0)
     if (props.action === 'right') {
-     api.velocity.set(45,-10,0);
+      api.velocity.set(45,-10,0);
       api.rotation.set(0, (Math.PI * 180/180), 0)
     }
     if (props.action === 'left') {
-
       api.velocity.set(-45,-10,0);
       api.rotation.set(0, (Math.PI * 0/180), 0)
     }
     if (props.action === 'up') {
-      api.velocity.set(0,-10,-25);
+      api.velocity.set(0,-10,-45);
       api.rotation.set(0, (Math.PI * -90/180), 0)
     }
     if (props.action === 'down') {
-      api.velocity.set(0,-10,25);
+      api.velocity.set(0,-10,45);
       api.rotation.set(0, (Math.PI * 90/180), 0)
     }
   })
