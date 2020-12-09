@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 class Stopwatch extends React.Component {
   constructor() {
@@ -9,12 +10,15 @@ class Stopwatch extends React.Component {
       //get elapsedTime
     };
   }
+
+  timer = 0
   componentDidMount() {
     //if paused, calculate the pause time (dont subtract and display until unpaused)
     //while paused, elapsedTime = elapsedTime - pauseTime.
-
+    console.log('mount gamestate', this.props.gameState)
     //if ...startTimer when isPlaying is true,
-    setInterval(() => {
+    // if (this.props.gameState.isPlaying) {
+    this.timer = setInterval(() => {
       let elapsedTime =
         Math.floor(performance.now() - this.state.startTime) / 1000;
       this.setState({
@@ -42,6 +46,10 @@ class Stopwatch extends React.Component {
     }, 10);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   resetTime() {
     this.setState({
       startTime: performance.now(),
@@ -59,4 +67,8 @@ class Stopwatch extends React.Component {
   }
 }
 
-export default Stopwatch;
+const mapState = (state) => ({
+  gameState: state.gameState
+})
+
+export default connect(mapState)(Stopwatch);

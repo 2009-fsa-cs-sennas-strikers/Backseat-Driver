@@ -1,19 +1,19 @@
 import React from 'react'
 import Game from './ThreeJs/Game'
-import Title from './TitleScreen'
-import NoPermission from './NoPermission'
+import Title from './components/TitleScreen'
+import NoPermission from './components/NoPermission'
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { connect } from 'react-redux'
 import { getGameState, updateGameState } from './store/gameState'
-import WinScreen from './WinScreen'
+import WinScreen from './components/WinScreen'
+import Stopwatch from './ThreeJs/Stopwatch'
 
 class App extends React.Component{
     constructor(){
       super()
       this.state = {
-        granted: '',
-        win: false
+        granted: ''
       }
       this.changePlaying = this.changePlaying.bind(this)
       this.changeWin = this.changeWin.bind(this)
@@ -24,15 +24,19 @@ class App extends React.Component{
     }
 
     changePlaying(){
+      const gameState = this.props.gameState
       this.props.updateGameState({
-        ...this.props.gameState,
-        isPlaying: true
+        ...gameState,
+        isPlaying: !gameState.isPlaying
       })
     }
 
     changeWin(){
-      this.setState({
-        win: !(this.state.win)
+      const gameState = this.props.gameState
+      this.props.updateGameState({
+        ...gameState,
+        isPlaying: false,
+        hasWon: true
       })
     }
   askPermission(){
@@ -50,7 +54,7 @@ class App extends React.Component{
       })
     })
   }
- 
+
   async getPermission (){
      const permissionStatus = await navigator.permissions.query({name: 'microphone'})
      return permissionStatus
@@ -58,7 +62,7 @@ class App extends React.Component{
 
 
   renderSwitch(permiss){
-    if (this.state.win && !(this.state.playing)){
+    if (this.props.gameState.hasWon && !(this.props.gameState.isPlaying)){
       return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
     } else {
     switch(permiss){
@@ -73,11 +77,12 @@ class App extends React.Component{
     }
   }
   }
-   
+
   render() {
   return (
     <>
     {this.renderSwitch(this.state.granted)}
+    {this.props.gameState.isPlaying ? <Stopwatch /> : null}
     </>
   )
   }

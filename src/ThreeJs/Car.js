@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame, useLoader } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { useBox, usePointToPointConstraint } from 'use-cannon'
+import { useBox, usePointToPointConstraint } from '@react-three/cannon'
 import car from '../models/models/McLaren.glb'
-import { PerspectiveCamera, PointerLockControls } from 'drei'
+import { PerspectiveCamera, PointerLockControls } from '@react-three/drei'
 import Viewport from './Viewport'
 import Block from './BlockK'
 
@@ -69,7 +69,7 @@ const Car = (props) => {
     if (carPosition.x >= -10 && carPosition.x <= 10 && carPosition.z >= -110 && carPosition.z <= -90) {
       props.stopListening()
       props.changeWin()
-      props.changePlaying()
+      // props.changePlaying()
     }
     api.velocity.set(0,-5,0)
     if (props.action === 'right') {
