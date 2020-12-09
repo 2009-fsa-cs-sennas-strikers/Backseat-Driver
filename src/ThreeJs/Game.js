@@ -1,8 +1,8 @@
 import React, { Suspense, } from 'react'
 import { Canvas } from 'react-three-fiber'
 import { loadModel, startListening, stopListening } from '../tenserFlow'
-import { Stars, OrbitControls} from 'drei'
-import {Physics} from 'use-cannon'
+import { Stars, OrbitControls} from '@react-three/drei'
+import {Physics} from '@react-three/cannon'
 import Car from './Car'
 import Box from './Box'
 import Plane from './PlaneofExistence'
@@ -11,7 +11,7 @@ import Block from './Block'
 import BlockK from './BlockK'
 import SidePlane from './SidePlane'
 import EndZone from './EndZone'
-import WinScreen from '../WinScreen'
+import WinScreen from '../components/WinScreen'
 import Stopwatch from './Stopwatch'
 
 class Game extends React.Component {
@@ -44,10 +44,9 @@ class Game extends React.Component {
       }
 
 render() {
-    
+
 return (
   <>
- 
 
    <Canvas>
         {/* <OrbitControls /> */}

@@ -13,7 +13,7 @@ const RESET_GAMESTATE = 'RESET_GAMESTATE';
 
 //calculate randomized start/endzone (could be two separate arrays with different combinations)
 //eg, if endzone A, then start is A, if enzone B, then start is B.
-const INITIAL_STATE = { isPlaying: false, isPaused: false, courseCompleted: false };
+const INITIAL_STATE = { isPlaying: false, hasWon: false,isPaused: false, courseCompleted: false };
 
 /**
  * ACTION CREATORS
