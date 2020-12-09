@@ -60,10 +60,10 @@ const Car = (props) => {
     const [randoRef, bApi] = useBox(() => ({mass:1, args:[4.7, 1.3, 2]}))
     const gltf = useLoader(GLTFLoader, car)
 
-    let carPosition;
-    if (carRef.current) {
-    carPosition = carRef.current.position
-    }
+  let carPosition;
+  if (carRef.current) {
+    carPosition = carRef.current.position;
+  }
 
   useFrame(() => {
     if (carPosition.x >= -10 && carPosition.x <= 10 && carPosition.z >= -110 && carPosition.z <= -90) {
@@ -88,22 +88,31 @@ const Car = (props) => {
       api.velocity.set(0,-1,15);
       api.rotation.set(0, (Math.PI * 90/180), 0)
     }
-  })
+  });
   return (
     <>
     <mesh ref={randoRef}>
     <boxBufferGeometry attach="geometry" args={[0.25, 0.25, 0.25]} position={4,0,0} />
     </mesh>
       <mesh ref={carRef}>
-        <PerspectiveCamera position={[0.7,0.35,0]} rotation={[0, Math.PI*90/180, 0]} makeDefault={true} />
+        <PerspectiveCamera
+          position={[0.7, 0.35, 0]}
+          rotation={[0, (Math.PI * 90) / 180, 0]}
+          makeDefault={true}
+        />
         <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} />
-          <primitive object={gltf.scene} scale={[10,10,10]} position={[1.8, 0, -1.825]} rotation={ [ 0, (Math.PI * -45/180), 0 ]} />
-          <meshStandardMaterial wireframe={true} attach="material" />
-          <PointerLockControls/>
+        <primitive
+          object={gltf.scene}
+          scale={[10, 10, 10]}
+          position={[1.8, 0, -1.825]}
+          rotation={[0, (Math.PI * -45) / 180, 0]}
+        />
+        <meshStandardMaterial wireframe={true} attach="material" />
+        <PointerLockControls />
       </mesh>
-      <Viewport carPosition={carPosition}/>
+      <Viewport carPosition={carPosition} />
     </>
-    )
-  }
+  );
+};
 
-export default Car
+export default Car;

@@ -1,16 +1,17 @@
 import React from 'react'
-import firebase from './firebase'
 import Game from './ThreeJs/Game'
 import Title from './TitleScreen'
 import NoPermission from './NoPermission'
+import firebase from "firebase/app";
+import "firebase/firestore";
+import { connect } from 'react-redux'
+import { getGameState, updateGameState } from './store/gameState'
 import WinScreen from './WinScreen'
-
 
 class App extends React.Component{
     constructor(){
       super()
       this.state = {
-        isPlaying: false,
         granted: '',
         win: false
       }
@@ -19,12 +20,13 @@ class App extends React.Component{
     }
 
     componentDidMount(){
-      this.askPermission()  
+      this.askPermission()
     }
 
     changePlaying(){
-      this.setState({
-        isPlaying: !(this.state.isPlaying)
+      this.props.updateGameState({
+        ...this.props.gameState,
+        isPlaying: true
       })
     }
 
@@ -61,13 +63,13 @@ class App extends React.Component{
     } else {
     switch(permiss){
       case 'granted':
-        return this.state.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
+        return this.props.gameState.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
       case 'denied':
         return <NoPermission />
       default:
         this.askPermission()
       return (
-        this.state.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
+        this.props.gameState.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
     }
   }
   }
@@ -82,4 +84,13 @@ class App extends React.Component{
 
 }
 
-export default App
+const mapState = (state) => ({
+  gameState: state.gameState
+})
+
+const mapDispatch = (dispatch) => ({
+  getGameState: () => dispatch(getGameState()),
+  updateGameState: (newGameState) => dispatch(updateGameState(newGameState))
+})
+
+export default connect(mapState,mapDispatch)(App)

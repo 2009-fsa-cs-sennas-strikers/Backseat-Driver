@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 import {useFrame} from 'react-three-fiber'
-import {OrthographicCamera} from 'drei'
+import {OrthographicCamera} from '@react-three/drei'
 
 const Viewport = (props) => {
   const viewportRef = useRef()

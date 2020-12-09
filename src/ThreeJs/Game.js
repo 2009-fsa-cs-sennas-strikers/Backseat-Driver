@@ -14,23 +14,22 @@ import EndZone from './EndZone'
 import WinScreen from '../WinScreen'
 import Stopwatch from './Stopwatch'
 
-class Game extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-          action: '',
-          endPosition: {}
-        }
-        this.voiceAction = this.voiceAction.bind(this);
-        this.updatePosition = this.updatePosition.bind(this);
-      }
+class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      action: '',
+      endPosition: {},
+    };
+    this.voiceAction = this.voiceAction.bind(this);
+    this.updatePosition = this.updatePosition.bind(this);
+  }
 
-      componentDidMount() {
-        loadModel()
-        .then(() => startListening(this.voiceAction))
-      }
+  componentDidMount() {
+    loadModel().then(() => startListening(this.voiceAction));
+  }
 
-      voiceAction(command) {
+  voiceAction(command) {
         this.setState({
           action: command,
         });
@@ -112,8 +111,8 @@ return (
         {/* <Viewport /> */}
       </Canvas>
       </>
-    )
-}
+    );
+  }
 }
 
-export default Game
+export default Game;

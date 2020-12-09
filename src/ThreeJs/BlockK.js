@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
-import { useBox } from 'use-cannon'
+import { useBox } from '@react-three/cannon'
 
 
 

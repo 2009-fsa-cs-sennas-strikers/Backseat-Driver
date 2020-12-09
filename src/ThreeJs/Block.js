@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
-import { useBox } from 'use-cannon'
+import { useBox } from '@react-three/cannon'
 
 // Made the block 30 length x 30 width x 10 height
 // Allocated 20length "streets between each block"

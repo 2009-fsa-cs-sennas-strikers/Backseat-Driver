@@ -1,70 +1,51 @@
-let recognizer;
-    let words;
-    const wordList = ["up", "down", "left", "right"];
-    let modelLoaded = false;
+import * as tf from '@tensorflow/tfjs';
+import * as speechCommands from '@tensorflow-models/speech-commands';
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const wrapperElement = document.getElementById('sp-cmd-wrapper');
-        for (let word of wordList) {
-            wrapperElement.innerHTML += `<div class='col-3 col-md-6'><div id='word-${word}' class='badge'>${word}</div></div>`;
-        };
+import VoiceModel from './audio-model/model.json';
+import VoiceModelMetadata from './audio-model/metadata.json';
 
-        document.getElementById("audio-switch").addEventListener('change', (event) => {
-            if(event.target.checked) {
-                if(modelLoaded) {
-                    startListening();
-                }else{
-                    loadModel();
-                }
-            } else {
-                stopListening();
-            }
-        });
-    });
+export default class Voice{
+    constructor() {
+        this.options = {
+            includeSpectogram: true,
+            overlapFactor: 0.5,
+            invokeCallbackOnNoiseAndUnkown: false,
+            probabilityThershold: 0.90,
+          };
+    }
 
-    async function loadModel() {
-        // Show the loading element
-        const loadingElement = document.getElementById('demo-loading');
-        loadingElement.classList.remove('hidden');
-
-        // When calling `create()`, you must provide the type of the audio input.
-        // - BROWSER_FFT uses the browser's native Fourier transform.
-        recognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+    async buildModel() {
+        const recognizer = speechCommands.create(
+            'BROWSER_FFT',
+            // 'directional4w',
+            null,
+            VoiceModel,
+            VoiceModelMetadata
+        );
         await recognizer.ensureModelLoaded()
 
-        words = recognizer.wordLabels();
-        modelLoaded = true;
-
-        // Hide the loading element
-        loadingElement.classList.add('hidden');
-        startListening();
+        return recognizer
     }
 
-    function startListening() {
-        recognizer.listen(({scores}) => {
+    async startListening(callback) {
+        this.recognizer = await this.buildModel();
 
-            // Everytime the model evaluates a result it will return the scores array
-            // Based on this data we will build a new array with each word and it's corresponding score
-            scores = Array.from(scores).map((s, i) => ({score: s, word: words[i]}));
+        const classLabels = this.recognizer.wordLabels();
 
-            // After that we sort the array by scode descending
-            scores.sort((s1, s2) => s2.score - s1.score);
+        this.recognizer.listen((result) => {
+            const scores = result.scores;
 
-            // And we highlight the word with the highest score
-            const elementId = `word-${scores[0].word}`;
-            document.getElementById(elementId).classList.add('active');
-            console.log(elementId)
+            const wordScore = scores.reduce((previousValue, value) => {
+                if (previousValue) {
+                if (previousValue > value) return previousValue;
+                }
+                return value;
+            });
 
-            // This is just for removing the highlight after 2.5 seconds
-            setTimeout(() => {
-                document.getElementById(elementId).classList.remove('active');
-            }, 2500);
-        },
-        {
-            probabilityThreshold: 0.90
-        });
+            const wordIdx = scores.findIndex((v) => v === wordScore);
+            const word = classLabels[wordIdx];
+
+            callback(word)
+        })
     }
-
-    function stopListening(){
-        recognizer.stopListening();
-    }
+}
