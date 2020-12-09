@@ -1,21 +1,20 @@
-import React from 'react'
-import { usePlane } from 'use-cannon'
+import React from 'react';
+import { usePlane } from '@react-three/cannon';
 
 const SidePlane = (props) => {
-    const [planeRef] = usePlane(() => ({
-      rotation: props.rotation,
-      position: props.position,
-      mass:0,
-      ...props
-    }))
+  const [planeRef] = usePlane(() => ({
+    rotation: props.rotation,
+    position: props.position,
+    mass: 0,
+    ...props,
+  }));
 
-    return (
-      <mesh ref={planeRef}>
-        <planeBufferGeometry attach="geometry" args={[300, 150]} />
-        <meshStandardMaterial attach="material" transparent={true} opacity={0}/>
-      </mesh>
-    )
+  return (
+    <mesh ref={planeRef}>
+      <planeBufferGeometry attach="geometry" args={[300, 150]} />
+      <meshStandardMaterial attach="material" transparent={true} opacity={0} />
+    </mesh>
+  );
+};
 
-  }
-
-export default SidePlane
+export default SidePlane;

@@ -1,48 +1,61 @@
-import React from 'react'
-
+import React from 'react';
 
 class Stopwatch extends React.Component {
   constructor() {
-    super()
-    this.state ={
-      startTime: performance.now()
+    super();
+    this.state = {
+      startTime: performance.now(),
+      elapsedTime: '',
       //get elapsedTime
-    }
+    };
   }
   componentDidMount() {
+    //if paused, calculate the pause time (dont subtract and display until unpaused)
+    //while paused, elapsedTime = elapsedTime - pauseTime.
 
     //if ...startTimer when isPlaying is true,
-    setInterval(()=>{
-      let elapsedTime = Math.floor(performance.now()  - this.state.startTime)/1000;
+    setInterval(() => {
+      let elapsedTime =
+        Math.floor(performance.now() - this.state.startTime) / 1000;
+      this.setState({
+        elapsedTime,
+      });
       let minutes, seconds, milliseconds;
-      minutes = Math.floor(elapsedTime/60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) //00 always two digits
-      seconds = Math.floor(elapsedTime - (minutes*60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) //00 always two digits
-      milliseconds = Math.floor(elapsedTime%1*100).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) //always two digits
+      minutes = Math.floor(elapsedTime / 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      }); //00 always two digits
+      seconds = Math.floor(elapsedTime - minutes * 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      }); //00 always two digits
+      milliseconds = Math.floor((elapsedTime % 1) * 100).toLocaleString(
+        'en-US',
+        { minimumIntegerDigits: 2, useGrouping: false }
+      ); //always two digits
       //add penalty to elapsedTime
       //update state's elapsedTime for leaderboar
-      document.getElementById('elapsed-time').innerHTML = `${minutes}:${seconds}:${milliseconds}`
-    //else ...endTimer and display only elapsedTime with penalty
-
-
-    }, 10)
+      document.getElementById(
+        'elapsed-time'
+      ).innerHTML = `${minutes}:${seconds}:${milliseconds}`;
+      //else ...endTimer and display only elapsedTime with penalty
+    }, 10);
   }
 
   resetTime() {
     this.setState({
-      startTime: performance.now()
-    })
+      startTime: performance.now(),
+    });
   }
 
-
-
   render() {
-    return(
-        <div id="stopwatch">
-          <div id="elapsed-time" />
-          <hr />
-           <p id="elapsed-label">ELAPSED TIME</p>
-        </div>
-    )
+    return (
+      <div id="stopwatch">
+        <div id="elapsed-time" />
+        <hr />
+        <p id="elapsed-label">ELAPSED TIME</p>
+      </div>
+    );
   }
 }
 
