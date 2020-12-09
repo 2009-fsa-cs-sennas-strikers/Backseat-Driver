@@ -6,14 +6,17 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { connect } from 'react-redux'
 import { getGameState, updateGameState } from './store/gameState'
+import WinScreen from './WinScreen'
 
 class App extends React.Component{
     constructor(){
       super()
       this.state = {
-        granted: ''
+        granted: '',
+        win: false
       }
       this.changePlaying = this.changePlaying.bind(this)
+      this.changeWin = this.changeWin.bind(this)
     }
 
     componentDidMount(){
@@ -27,6 +30,11 @@ class App extends React.Component{
       })
     }
 
+    changeWin(){
+      this.setState({
+        win: !(this.state.win)
+      })
+    }
   askPermission(){
     return navigator.mediaDevices.getUserMedia({audio: true}).then(() => {
       this.getPermission().then((permis) => {
@@ -42,7 +50,7 @@ class App extends React.Component{
       })
     })
   }
-
+ 
   async getPermission (){
      const permissionStatus = await navigator.permissions.query({name: 'microphone'})
      return permissionStatus
@@ -50,9 +58,12 @@ class App extends React.Component{
 
 
   renderSwitch(permiss){
+    if (this.state.win && !(this.state.playing)){
+      return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
+    } else {
     switch(permiss){
       case 'granted':
-        return this.props.gameState.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>
+        return this.props.gameState.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
       case 'denied':
         return <NoPermission />
       default:
@@ -61,7 +72,8 @@ class App extends React.Component{
         this.props.gameState.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
     }
   }
-
+  }
+   
   render() {
   return (
     <>
