@@ -1,6 +1,6 @@
 import React, { Suspense, } from 'react'
 import { Canvas } from 'react-three-fiber'
-import { loadModel, startListening } from '../tenserFlow'
+import { loadModel, startListening, stopListening } from '../tenserFlow'
 import { Stars, OrbitControls} from 'drei'
 import {Physics} from 'use-cannon'
 import Car from './Car'
@@ -11,6 +11,7 @@ import Block from './Block'
 import BlockK from './BlockK'
 import SidePlane from './SidePlane'
 import EndZone from './EndZone'
+import WinScreen from '../WinScreen'
 import Stopwatch from './Stopwatch'
 
 class Game extends React.Component{
@@ -35,7 +36,6 @@ class Game extends React.Component{
         });
         console.log('voice command:', this.state.action);
       }
-
       // function to pass EndZone Position
       // up to parent as props
       updatePosition(endPosition) {
@@ -45,9 +45,11 @@ class Game extends React.Component{
       }
 
 render() {
+    
 return (
   <>
-   <Stopwatch />
+ 
+
    <Canvas>
         {/* <OrbitControls /> */}
         <Stars />
@@ -56,7 +58,7 @@ return (
         <Physics gravity={[0, -100, 0]}>
           <Plane rotation={[-(Math.PI/2), 0, 0]} />
           <Suspense fallback={<Box />}>
-          {<Car action={this.state.action} position={[0,0,100]} />}
+          {<Car action={this.state.action} position={[0,5,100]} stopListening={stopListening} changeWin={this.props.changeWin} changePlaying={this.props.changePlaying} />}
           </Suspense>
           <EndZone />
           {/* One Row */}

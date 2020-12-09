@@ -3,6 +3,7 @@ import firebase from './firebase'
 import Game from './ThreeJs/Game'
 import Title from './TitleScreen'
 import NoPermission from './NoPermission'
+import WinScreen from './WinScreen'
 
 
 class App extends React.Component{
@@ -10,9 +11,11 @@ class App extends React.Component{
       super()
       this.state = {
         isPlaying: false,
-        granted: ''
+        granted: '',
+        win: false
       }
       this.changePlaying = this.changePlaying.bind(this)
+      this.changeWin = this.changeWin.bind(this)
     }
 
     componentDidMount(){
@@ -21,10 +24,15 @@ class App extends React.Component{
 
     changePlaying(){
       this.setState({
-        isPlaying: true
+        isPlaying: !(this.state.isPlaying)
       })
     }
 
+    changeWin(){
+      this.setState({
+        win: !(this.state.win)
+      })
+    }
   askPermission(){
     return navigator.mediaDevices.getUserMedia({audio: true}).then(() => {
       this.getPermission().then((permis) => {
@@ -40,7 +48,7 @@ class App extends React.Component{
       })
     })
   }
-
+ 
   async getPermission (){
      const permissionStatus = await navigator.permissions.query({name: 'microphone'})
      return permissionStatus
@@ -48,9 +56,12 @@ class App extends React.Component{
 
 
   renderSwitch(permiss){
+    if (this.state.win && !(this.state.playing)){
+      return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
+    } else {
     switch(permiss){
       case 'granted':
-        return this.state.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>
+        return this.state.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
       case 'denied':
         return <NoPermission />
       default:
@@ -59,7 +70,8 @@ class App extends React.Component{
         this.state.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
     }
   }
-
+  }
+   
   render() {
   return (
     <>

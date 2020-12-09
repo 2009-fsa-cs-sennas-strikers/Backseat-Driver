@@ -6,7 +6,7 @@ class NoPermission extends React.Component {
     render(){
         return(
             <>
-            <div style={{color:'white'}}>PLEASE ALLOW MICROPHONE</div>
+            <div id='title' >PLEASE ALLOW MICROPHONE</div>
             </>
         )
     }
