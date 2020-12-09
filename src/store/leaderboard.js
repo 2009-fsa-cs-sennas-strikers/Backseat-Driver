@@ -1,5 +1,9 @@
-//do we need this?
-import axios from 'axios';
+import firebase from '../firebase';
+
+// Inititializing firebase database
+// Saving reference to leaderboard table
+const db = firebase.firestore();
+const leaderboardRef = db.collection('leaderboard')
 
 /**
  * ACTION TYPES
@@ -28,11 +32,10 @@ const addToLeaderboard = (newRecord) => ({
 /**
  * THUNK CREATORS
  */
-export const fetchLeaderboardFromDBb = () => async (dispatch) => {
-  //do we need axios and routes? or can we access firestore db directly?
+export const fetchLeaderboardFromDb = () => async (dispatch) => {
   try {
-  const { data } = await axios.get(`/api/leaderboard/`);
-  dispatch(getLeaderboard(data));
+    const leaderboard = await leaderboardRef.orderBy('score', 'desc').limit(10).get();
+    dispatch(getLeaderboard(leaderboard));
   } catch (error) {
     console.log(error)
   }
@@ -40,9 +43,12 @@ export const fetchLeaderboardFromDBb = () => async (dispatch) => {
 
 export const addRecordToDb = (newRecord) => async (dispatch) => {
   try {
-    //do we need axios and routes? or can we access firestore db directly?
-    const { data } = await axios.post(`/api/leaderboard`, newRecord);
-    dispatch(addToLeaderboard(data));
+    const newScore = await leaderboardRef.doc(newRecord.name).set(newRecord);
+    // newRecord may not be in order
+    // sort score if not in order
+    // may not need to dispatch, could just fetch all
+    // scores on separate screen
+    dispatch(addToLeaderboard(newScore));
   } catch (error) {
     console.log(error);
   }

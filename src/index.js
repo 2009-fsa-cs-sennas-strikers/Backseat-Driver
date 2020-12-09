@@ -4,12 +4,13 @@ import './index.css';
 import firebase from './firebase'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-
-
+import { Provider } from 'react-redux'
+import store from '../src/store'
 
 ReactDOM.render(
-    <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
