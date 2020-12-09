@@ -1,9 +1,9 @@
 import React from 'react'
-import firebase from './firebase'
 import Game from './ThreeJs/Game'
 import Title from './TitleScreen'
 import NoPermission from './NoPermission'
-
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 class App extends React.Component{
     constructor(){
@@ -16,7 +16,7 @@ class App extends React.Component{
     }
 
     componentDidMount(){
-      this.askPermission()  
+      this.askPermission()
     }
 
     changePlaying(){
