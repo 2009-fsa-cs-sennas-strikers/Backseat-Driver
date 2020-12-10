@@ -13,6 +13,7 @@ import SidePlane from './SidePlane'
 import EndZone from './EndZone'
 import WinScreen from '../components/WinScreen'
 import Stopwatch from './Stopwatch'
+import store from '../store'
 
 class Game extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ return (
           <Suspense fallback={<Box />}>
           {<Car action={this.state.action} position={[0,5,100]} stopListening={stopListening} changeWin={this.props.changeWin} changePlaying={this.props.changePlaying} />}
           </Suspense>
-          <EndZone />
+          <EndZone store={store}/>
           {/* One Row */}
           <Block position={[-125,5,100]}/>
           <Block position={[-75,5,100]}/>
