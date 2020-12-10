@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
 body,
 #root {
-  width: 100vw;
-  height: 100vh;
   margin: 0;
   padding: 0;
 
@@ -17,15 +19,42 @@ body,
   -ms-user-select: none;
   user-select: none;
   /* overflow: hidden; */
-  background: #272727;
+}
 
+p {
+  padding: 10px;
+  letter-spacing: 0.2rem;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 10vw;
+  font-weight: 500;
+  text-shadow: -2px 2px 5px white;
+}
+h2 {
+  padding: 0;
+  margin: 0;
+  font-weight: 200;
+  font-size: 2vw;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Titillium Web', sans-serif;
+  background: linear-gradient(#272727, #000000);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
-    segoe ui, aråial, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, aråial,
+    sans-serif; */
+  /* font-family: 'Titillium Web', sans-serif; */
+  color: white;
+  background: linear-gradient(#272727, #000000);
 }
-
 
 .controls {
   display: flex;
@@ -52,11 +81,8 @@ body {
   margin: 0.1rem;
 }
 
-
-
 #stopwatch {
   display: flex;
-
   position: absolute;
   color: white;
   text-shadow: -2px 2px 5px white;
@@ -65,20 +91,23 @@ body {
   z-index: 10;
   bottom: 50px;
   left: 50px;
-  transform: skew(12deg,5deg);
-
+  transform: skew(12deg, 5deg);
 }
 
 #elapsed-time {
-  width: 320px;
-  font-size: 80px;
+  flex: 1 1 auto;
+  padding-right: 0.5vw;
+  font-size: 4vw;
   font-weight: 200;
   margin: 0;
 }
 
 #elapsed-label {
-  width: 50px;
+  display: flex;
+  align-items: center;
+  width: 1VH;
   padding-left: 20px;
+
   margin: 10x;
 }
 
@@ -87,42 +116,63 @@ canvas {
   height: 100%;
 }
 
+#home {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #title {
-  color: white;
-  font-family: sans-serif;
+  margin-top: 30vh;
+  text-transform: uppercase;
+  font-style: italic;
   text-align: center;
-  font-size: 7vw;
-  letter-spacing: 0.4em;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* /* letter-spacing: 0.4em; */
+  /* position: fixed; */
+  /* transform: translate(-50%, -50%); */
 }
 
 #github {
-  font-size: 2vh;
   position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  text-align: center;
+  bottom: 10%;
+  /* transform: translate(-50%, 0%); */
+  /* color: white; */
+  /* text-align: center; */
+  display: inline-block;
+  background-color: white;
+  border-radius: 100px;
+
+
 }
 
 #playButton {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  position: fixed;
-  font-size: 3.5vh;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  color: white;
+  background: linear-gradient(#1f1f1f, #000000);
+  font-size: 4vh;
   border: 1px solid;
-  border-radius: 14px;
+  /* border-radius: 14px; */
   background-color: transparent;
+  text-decoration: uppercase;
   text-align: center;
-  padding: 1vh 1vw;
+  padding: 14px 18px;
+  transform: skew(-10deg);
+  box-shadow: 10px 10px white;
+  /* position: fixed;
+  top: 65%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  animation-name: hover;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
+@keyframes hover {
+  0%   {margin-top: 0px; box-shadow: 10px 10px white; }
+  50%  {margin-top: 5px; margin-bottom: -5px; box-shadow: 8px 8px white;}
+  100% {margin-top: 0px; box-shadow: 10px 10px white;}
+}
