@@ -21,6 +21,11 @@ body,
   /* overflow: hidden; */
 }
 
+p {
+  padding: 10px;
+  letter-spacing: 0.2rem;
+}
+
 h1 {
   padding: 0;
   margin: 0;
@@ -129,18 +134,15 @@ canvas {
 }
 
 #github {
-  font-size: 2vh;
-  /* position: fixed;
-  width: 100%;
-  height: 100%; */
-  /* top: 80%;
-  left: 50%; */
+  position: fixed;
+  bottom: 10%;
   /* transform: translate(-50%, 0%); */
   /* color: white; */
   /* text-align: center; */
   display: inline-block;
   background-color: white;
   border-radius: 100px;
+
 
 }
 
@@ -149,6 +151,7 @@ canvas {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   color: white;
+  background: linear-gradient(#1f1f1f, #000000);
   font-size: 4vh;
   border: 1px solid;
   /* border-radius: 14px; */
@@ -162,4 +165,14 @@ canvas {
   top: 65%;
   left: 50%; */
   /* transform: translate(-50%, -50%); */
+  animation-name: hover;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes hover {
+  0%   {margin-top: 0px; box-shadow: 10px 10px white; }
+  50%  {margin-top: 5px; margin-bottom: -5px; box-shadow: 8px 8px white;}
+  100% {margin-top: 0px; box-shadow: 10px 10px white;}
 }
