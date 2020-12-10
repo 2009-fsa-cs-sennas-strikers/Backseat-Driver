@@ -57,7 +57,7 @@ return (
         <Physics gravity={[0, -100, 0]}>
           <Plane rotation={[-(Math.PI/2), 0, 0]} />
           <Suspense fallback={<Box />}>
-          {<Car action={this.state.action} position={[0,5,100]} stopListening={stopListening} changeWin={this.props.changeWin} changePlaying={this.props.changePlaying} />}
+          {<Car action={this.state.action} carPosition={[0,5,100]} stopListening={stopListening} changeWin={this.props.changeWin} changePlaying={this.props.changePlaying} store={store}/>}
           </Suspense>
           <EndZone store={store}/>
           {/* One Row */}

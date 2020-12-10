@@ -7,13 +7,14 @@ import car from '../models/models/McLaren.glb'
 import { PerspectiveCamera, PointerLockControls } from '@react-three/drei'
 import Viewport from './Viewport'
 import Block from './BlockK'
+import { connect } from 'react-redux'
 
 const Car = (props) => {
   // position from state (unused)
   console.log(props)
   //carRef: car's property in scene (read only)
   //api: car's physics object (methods to set/subscribe)
-    const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], position: props.position}))
+    const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], position: props.carPosition}))
     const [randoRef, bApi] = useBox(() => ({mass:1, args:[4.7, 1.3, 2]}))
     const gltf = useLoader(GLTFLoader, car)
 
@@ -21,9 +22,10 @@ const Car = (props) => {
   if (carRef.current) {
     carPosition = carRef.current.position;
   }
-
+  const endZonePosition = props.position
   useFrame(() => {
-    if (carPosition.x >= -10 && carPosition.x <= 10 && carPosition.z >= -110 && carPosition.z <= -90) {
+      if (carPosition.x >=  endZonePosition.x - 10 && carPosition.x <= endZonePosition.x + 10 && carPosition.z  >=  endZonePosition.z - 10 && carPosition.z <= endZonePosition.z + 10) {
+
       props.stopListening()
       props.changeWin()
       // props.changePlaying()
@@ -72,4 +74,8 @@ const Car = (props) => {
   );
 };
 
-export default Car;
+const mapState = (state) => ({
+  position: state.position
+})
+
+export default connect(mapState, null)(Car);
