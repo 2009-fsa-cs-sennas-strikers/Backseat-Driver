@@ -47,73 +47,42 @@ class Game extends React.Component {
   render() {
     return (
       <>
-        <Canvas shadowMap>
+
+        <Canvas concurrent sRGB gl={{ alpha: false }} colorManagement shadowMap>
           {/* <OrbitControls /> */}
           <Stars />
-          <ambientLight intensity={0.5} />
-          <pointLight
+          <hemisphereLight intensity={0.5} />
+          <ambientLight intensity={0.2} />
+          <spotLight
             castShadow
-            penUmbra={1}
+            penumbra={1}
             intensity={2}
             position={[150, 300, -150]}
             lookAt={[0, 0, 300]}
+            shadow-mapSize-width={512} shadow-mapSize-height={512}
+            shadow-camera-near={0.1}
+            shadow-camera-far={500}
+
           />
           <Physics gravity={[0, -100, 0]}>
             <Plane rotation={[-(Math.PI / 2), 0, 0]} />
+            <EndZone />
             <Suspense fallback={<Box />}>
               {
                 <Car
-                  action={this.state.action}
-                  position={[0, 1, 150]}
-                  stopListening={stopListening}
-                  changeWin={this.props.changeWin}
-                  changePlaying={this.props.changePlaying}
+                action={this.state.action}
+                position={[0, 1, 150]}
+                stopListening={stopListening}
+                changeWin={this.props.changeWin}
+                changePlaying={this.props.changePlaying}
                 />
               }
             </Suspense>
-            <EndZone />
             <WorldLayout />
-            {/* One Row */}
-            {/* <Block position={[-125,5,100]}/>
-          <Block position={[-75,5,100]}/>
-          <Block position={[-25,5,100]}/>
-          <Block position={[25,5,100]}/>
-          <Block position={[75,5,100]}/>
-          <Block position={[125,5,100]}/> */}
-            {/* One Row */}
-            {/* <Block position={[-125,5,50]}/>
-          <Block position={[-75,5,50]}/>
-          <Block position={[-25,5,50]}/>
-          <Block position={[25,5,50]}/>
-          <Block position={[75,5,50]}/>
-          <Block position={[125,5,50]}/> */}
-            {/* One Row */}
-            {/* <Block position={[-125,5,0]}/>
-          <Block position={[-75,5,0]}/>
-          <Block position={[-25,5,0]}/>
-          <Block position={[25,5,0]}/>
-          <Block position={[75,5,0]}/>
-          <Block position={[125,5,0]}/> */}
-
-            {/* One Row */}
-            {/* <Block position={[-125,5,-50]}/>
-          <Block position={[-75,5,-50]}/>
-          <Block position={[-25,5,-50]}/>
-          <Block position={[25,5,-50]}/>
-          <Block position={[75,5,-50]}/>
-          <Block position={[125,5,-50]}/> */}
-            {/* One Row */}
-            {/* <Block position={[-125,5,-100]}/>
-          <Block position={[-75,5,-100]}/>
-          <Block position={[-25,5,-100]}/>
-          <Block position={[25,5,-100]}/>
-          <Block position={[75,5,-100]}/>
-          <Block position={[125,5,-100]}/> */}
-            {/* One Row */}
-            <SidePlane position={[0, 0, -150]} />
-            <SidePlane rotation={[0, Math.PI, 0]} position={[0, 0, 150]} />
-            <SidePlane rotation={[0, -Math.PI / 2, 0]} position={[150, 0, 0]} />
-            <SidePlane rotation={[0, Math.PI / 2, 0]} position={[-150, 0, 0]} />
+            <SidePlane position={[0, 0, -180]} />
+            <SidePlane rotation={[0, Math.PI, 0]} position={[0, 0, 180]} />
+            <SidePlane rotation={[0, -Math.PI / 2, 0]} position={[180, 0, 0]} />
+            <SidePlane rotation={[0, Math.PI / 2, 0]} position={[-180, 0, 0]} />
           </Physics>
           {/* <Viewport /> */}
         </Canvas>

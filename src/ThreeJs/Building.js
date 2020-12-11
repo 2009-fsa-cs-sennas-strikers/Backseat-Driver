@@ -7,7 +7,6 @@ import flat from '../textures/light-concrete.jpg';
 
 // Made the block 30 length x 30 width x 10 height
 // Allocated 20length "streets between each block"
-
 const Building = (props) => {
   // const blockRef = useRef()
   // const glassTex = useLoader(THREE.TextureLoader, glass)
@@ -19,10 +18,16 @@ const Building = (props) => {
   }));
 
   return (
-    <mesh ref={buildingRef} receiveShadow castShadow>
+    <group ref={buildingRef} receiveShadow castShadow>
+    <mesh  receiveShadow castShadow>
       <boxBufferGeometry attach="geometry" args={props.args} />
-      <meshStandardMaterial attach="material" transparent opacity={0.5} />
+      <meshStandardMaterial attach="material" color={props.color} roughness={0.5} metalNess={0.5}/>
     </mesh>
+    {props.color !== 'green' && <mesh >
+      <boxBufferGeometry attach="geometry" args={props.args} />
+      <meshBasicMaterial attach="material" wireframe color='gray' />
+    </mesh>}
+    </group>
   );
 };
 

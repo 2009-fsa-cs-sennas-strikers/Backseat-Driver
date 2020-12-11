@@ -1,6 +1,5 @@
 import React from 'react';
 import { useBox } from '@react-three/cannon';
-import { useLoader } from 'react-three-fiber';
 import * as THREE from 'three';
 import sidewalk from '../textures/sidewalk.jpg';
 
