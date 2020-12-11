@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addRecordToDb } from '../store/leaderboard';
 import { getGameState, resetGameState, gameStatePlaying, gameStateWin } from '../store/gameState';
-// import Leaderboard from './Leaderboard'
+import Leaderboard from './leaderboard'
 
 class WinScreen extends React.Component {
     constructor(props){
@@ -33,9 +33,6 @@ class WinScreen extends React.Component {
 
     resetGame() {
         this.props.resetGame()
-        // const gameState = this.props.gameState
-        // this.props.gameStateWin(!gameState.hasWon)
-        // this.props.gameStateWin(!gameState.hasWon)
     }
 
     toggleLeaderboard() {
@@ -64,10 +61,10 @@ class WinScreen extends React.Component {
                     </a>
                 </div>
                 <button onClick={this.toggleLeaderboard}>Show Leaderboard</button>
-                {/* {
+                {
                 this.state.showModal &&
                 <Leaderboard showModal={this.state.showModal} toggleLeaderboard={this.toggleLeaderboard}/>
-                } */}
+                }
             </div>
         )
     }
@@ -81,9 +78,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
     addToLeaderboard: (score) => dispatch(addRecordToDb(score)),
-    resetGame: () => dispatch(resetGameState()),
-    gameStateWin: (hasWon) => dispatch(gameStateWin(hasWon)),
-    gameStatePlaying: (isPlaying) => dispatch(gameStatePlaying(isPlaying))
+    resetGame: () => dispatch(resetGameState())
 })
 
 export default connect(mapState, mapDispatch)(WinScreen)
