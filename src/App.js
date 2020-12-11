@@ -5,7 +5,7 @@ import NoPermission from './components/NoPermission'
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { connect } from 'react-redux'
-import { getGameState, updateGameState } from './store/gameState'
+import { getGameState, gameStatePlaying, gameStateWin } from './store/gameState'
 import WinScreen from './components/WinScreen'
 import Stopwatch from './ThreeJs/Stopwatch'
 
@@ -25,20 +25,14 @@ class App extends React.Component{
 
     changePlaying(){
       const gameState = this.props.gameState
-      this.props.updateGameState({
-        ...gameState,
-        isPlaying: !gameState.isPlaying
-      })
+      this.props.gameStatePlaying(!gameState.isPlaying)
     }
 
     changeWin(){
       const gameState = this.props.gameState
-      this.props.updateGameState({
-        ...gameState,
-        isPlaying: false,
-        hasWon: true
-      })
+      this.props.gameStateWin(!gameState.hasWon)
     }
+
   askPermission(){
     return navigator.mediaDevices.getUserMedia({audio: true}).then(() => {
       this.getPermission().then((permis) => {
@@ -95,7 +89,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   getGameState: () => dispatch(getGameState()),
-  updateGameState: (newGameState) => dispatch(updateGameState(newGameState))
+  gameStateWin: (hasWon) => dispatch(gameStateWin(hasWon)),
+  gameStatePlaying: (isPlaying) => dispatch(gameStatePlaying(isPlaying))
 })
 
 export default connect(mapState,mapDispatch)(App)

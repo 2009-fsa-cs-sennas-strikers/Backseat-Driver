@@ -32,9 +32,10 @@ const addToLeaderboard = (newRecord) => ({
 /**
  * THUNK CREATORS
  */
-export const fetchLeaderboardFromDb = () => async (dispatch) => {
+export const fetchLeaderboard = () => async (dispatch) => {
   try {
-    const leaderboard = await leaderboardRef.orderBy('score', 'desc').limit(10).get();
+    const data = await leaderboardRef.orderBy('score').limit(10).get();
+    const leaderboard = data.docs.map(doc => doc.data());
     dispatch(getLeaderboard(leaderboard));
   } catch (error) {
     console.log(error)
@@ -43,12 +44,10 @@ export const fetchLeaderboardFromDb = () => async (dispatch) => {
 
 export const addRecordToDb = (newRecord) => async (dispatch) => {
   try {
-    const newScore = await leaderboardRef.doc(newRecord.name).set(newRecord);
-    // newRecord may not be in order
-    // sort score if not in order
-    // may not need to dispatch, could just fetch all
-    // scores on separate screen
-    dispatch(addToLeaderboard(newScore));
+    const scoreRef = leaderboardRef.doc()
+    const scoreData = await scoreRef.set(newRecord)
+    // console.log('scoreData', scoreData.doc.data())
+    // dispatch(addToLeaderboard(scoreData.data()));
   } catch (error) {
     console.log(error);
   }
