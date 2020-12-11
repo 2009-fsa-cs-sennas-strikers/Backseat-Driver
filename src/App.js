@@ -35,8 +35,7 @@ class App extends React.Component{
       const gameState = this.props.gameState
       this.props.updateGameState({
         ...gameState,
-        isPlaying: false,
-        hasWon: true
+        hasWon: !gameState.hasWon
       })
     }
   askPermission(){
@@ -63,7 +62,7 @@ class App extends React.Component{
 
   renderSwitch(permiss){
     if (this.props.gameState.hasWon && !(this.props.gameState.isPlaying)){
-      return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
+      return <WinScreen />
     } else {
     switch(permiss){
       case 'granted':

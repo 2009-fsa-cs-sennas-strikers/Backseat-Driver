@@ -28,7 +28,7 @@ const Car = (props) => {
 
       props.stopListening()
       props.changeWin()
-      // props.changePlaying()
+      props.changePlaying()
     }
     api.velocity.set(0,-5,0)
     if (props.action === 'right') {
