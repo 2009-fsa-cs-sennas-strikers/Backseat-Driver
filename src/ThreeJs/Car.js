@@ -10,8 +10,6 @@ import Block from './BlockK'
 import { connect } from 'react-redux'
 
 const Car = (props) => {
-  // position from state (unused)
-  console.log(props)
   //carRef: car's property in scene (read only)
   //api: car's physics object (methods to set/subscribe)
     const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], position: props.carPosition}))
@@ -28,7 +26,7 @@ const Car = (props) => {
 
       props.stopListening()
       props.changeWin()
-      // props.changePlaying()
+      props.changePlaying()
     }
     api.velocity.set(0,-5,0)
     if (props.action === 'right') {
