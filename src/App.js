@@ -9,6 +9,7 @@ import { getGameState, gameStatePlaying, gameStateWin } from './store/gameState'
 import WinScreen from './components/WinScreen';
 import Stopwatch from './ThreeJs/Stopwatch';
 import store from './store';
+import AudioPlayer from './components/AudioPlayer'
 
 class App extends React.Component{
     constructor(){
@@ -76,6 +77,7 @@ class App extends React.Component{
   render() {
   return (
     <>
+    <AudioPlayer />
     {this.renderSwitch(this.state.granted)}
     {this.props.gameState.isPlaying ? <Stopwatch /> : null}
     </>
