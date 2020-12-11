@@ -15,13 +15,15 @@ let baseVel = 0
 let xX, yY, zZ
 
 const Car = (props) => {
-  // position from state (unused)
-  console.log(props)
   //carRef: car's property in scene (read only)
   //api: car's physics object (methods to set/subscribe)
-    const [carRef, api] = useBox(() => ({mass:1, args:[4.7, 1.3, 2], position: props.carPosition}))
-    const [randoRef, bApi] = useBox(() => ({mass:1, args:[4.7, 1.3, 2]}))
-    const gltf = useLoader(GLTFLoader, car)
+  const gltf = useLoader(GLTFLoader, car);
+  const [carRef, api] = useBox(() => ({
+    mass: 1,
+    args: [4.7, 1.3, 2],
+    position: props.carPosition,
+  }));
+  // const [randoRef, bApi] = useBox(() => ({mass:1, args:[4.7, 1.3, 2]}))
 
   let carPosition;
   if (carRef.current) {
@@ -35,7 +37,7 @@ const Car = (props) => {
 
       props.stopListening()
       props.changeWin()
-      // props.changePlaying()
+      props.changePlaying()
     }
     
     api.rotation.set(0, (Math.PI * rotation/180), 0)
@@ -110,16 +112,16 @@ const Car = (props) => {
   });
   return (
     <>
-    <mesh ref={randoRef}>
+      {/* <mesh ref={randoRef}>
     <boxBufferGeometry attach="geometry" args={[0.25, 0.25, 0.25]} position={4,0,0} />
-    </mesh>
+    </mesh> */}
       <mesh ref={carRef}>
         <PerspectiveCamera
           position={[0.7, 0.35, 0]}
           rotation={[0, (Math.PI * 90) / 180, 0]}
           makeDefault={true}
         />
-        <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} />
+        {/* <boxBufferGeometry attach="geometry" args={[4.7, 1.3, 2]} /> */}
         <primitive
           object={gltf.scene}
           scale={[10, 10, 10]}

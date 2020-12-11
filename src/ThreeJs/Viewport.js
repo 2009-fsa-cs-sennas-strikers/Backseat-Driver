@@ -22,6 +22,8 @@ const Viewport = (props) => {
     gl.clearDepth();
 
     // render minicamera
+    //2000 is a good size
+    //left and bottom pixel dictate size
     gl.setViewport(
       miniMapLocationLeftPixels,
       miniMapLocationBottomPixels,
