@@ -6,7 +6,7 @@ let words;
 const wordList = [];
 
 export async function loadModel() {
-  recognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  recognizer = speechCommands.create('BROWSER_FFT', '18w');
   // directional4w
   await recognizer.ensureModelLoaded();
   // Make sure that the underlying model and metadata are loaded via HTTPS

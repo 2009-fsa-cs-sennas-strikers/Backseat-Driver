@@ -9,6 +9,11 @@ import Viewport from './Viewport'
 import Block from './BlockK'
 import { connect } from 'react-redux'
 
+let rotation = 0
+let acc = 0
+let baseVel = 0
+let xX, yY, zZ
+
 const Car = (props) => {
   // position from state (unused)
   console.log(props)
@@ -23,30 +28,85 @@ const Car = (props) => {
     carPosition = carRef.current.position;
   }
   const endZonePosition = props.position
+  
   useFrame(() => {
+  console.log(baseVel, acc)
       if (carPosition.x >=  endZonePosition.x - 10 && carPosition.x <= endZonePosition.x + 10 && carPosition.z  >=  endZonePosition.z - 10 && carPosition.z <= endZonePosition.z + 10) {
 
       props.stopListening()
       props.changeWin()
       // props.changePlaying()
     }
-    api.velocity.set(0,-5,0)
-    if (props.action === 'right') {
-      api.velocity.set(15,-1,0);
-      api.rotation.set(0, (Math.PI * 180/180), 0)
+    
+    api.rotation.set(0, (Math.PI * rotation/180), 0)
+  switch (props.action){
+    case 'right':
+        rotation -= 90
+        props.setAction('')
+      break;
+    case 'left':
+        rotation += 90
+        props.setAction('')
+      break;
+    case 'up':
+      if (acc < 5 && baseVel > 0){
+      acc++
+      }
+      props.setAction('')
+      break;
+    case 'down':
+      if (acc > 0){
+      acc--
+      }
+      props.setAction('')
+      break;
+    case 'go':
+      baseVel = 10
+      if (acc === 0){
+        acc++
+      }
+      props.setAction('')
+      break;
+    case 'stop':
+      baseVel = 0
+      acc = 0
+      props.setAction('')
+    break;
+    default:
+     break; 
+  }
+
+    if (rotation === 360 || rotation === -360){
+      rotation = 0
     }
-    if (props.action === 'left') {
-      api.velocity.set(-15,-1,0);
-      api.rotation.set(0, (Math.PI * 0/180), 0)
-    }
-    if (props.action === 'up') {
-      api.velocity.set(0,-1,-45);
-      api.rotation.set(0, (Math.PI * -90/180), 0)
-    }
-    if (props.action === 'down') {
-      api.velocity.set(0,-1,15);
-      api.rotation.set(0, (Math.PI * 90/180), 0)
-    }
+  
+  switch(rotation/90){
+    case 0:
+      api.velocity.set(-(baseVel*acc),-1,0)
+    break;
+    case 1:
+      api.velocity.set(0,-1,(baseVel*acc))
+    break;
+    case 2:
+      api.velocity.set((baseVel*acc),-1,0)
+      break;
+    case 3:
+      api.velocity.set(0,-1,-(baseVel*acc))
+      break;
+    case -3:
+        api.velocity.set(0,-1,(baseVel*acc))
+      break;
+    case -2:
+        api.velocity.set((baseVel*acc),-1,0)
+        break;
+    case -1:
+        api.velocity.set(0,-1,-(baseVel*acc))
+        break;
+    default:
+    break;
+  }
+    
+
   });
   return (
     <>
