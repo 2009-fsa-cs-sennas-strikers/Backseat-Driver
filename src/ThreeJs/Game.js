@@ -48,7 +48,6 @@ class Game extends React.Component {
   render() {
     return (
       <>
-
         <Canvas colorManagement shadowMap>
           {/* <OrbitControls /> */}
           <Stars />
@@ -63,7 +62,6 @@ class Game extends React.Component {
             shadow-mapSize-width={512} shadow-mapSize-height={512}
             shadow-camera-near={0.1}
             shadow-camera-far={500}
-
           />
           <Physics gravity={[0, -100, 0]}>
             <Plane rotation={[-(Math.PI / 2), 0, 0]} />
