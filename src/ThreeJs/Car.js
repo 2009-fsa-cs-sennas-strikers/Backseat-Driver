@@ -41,12 +41,16 @@ const Car = (props) => {
     api.rotation.set(0, (Math.PI * rotation/180), 0)
   switch (props.action){
     case 'right':
-        rotation -= 90
-        props.setAction('')
+        rotation--
+        if ( (rotation % 90) === 0){
+          props.setAction('')
+          }
       break;
     case 'left':
-        rotation += 90
+        rotation++
+        if ( (rotation % 90) === 0){
         props.setAction('')
+        }
       break;
     case 'up':
       if (acc < 5 && baseVel > 0){
@@ -80,7 +84,7 @@ const Car = (props) => {
       rotation = 0
     }
   
-  switch(rotation/90){
+  switch(Math.round(rotation/90)){
     case 0:
       api.velocity.set(-(baseVel*acc),-1,0)
     break;
