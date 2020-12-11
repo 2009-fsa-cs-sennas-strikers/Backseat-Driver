@@ -1,17 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addRecordToDb } from '../store/leaderboard';
-import { getGameState, updateGameState, resetGameState } from '../store/gameState'
+import { getGameState, updateGameState, resetGameState } from '../store/gameState';
+import Leaderboard from './Leaderboard'
 
 class WinScreen extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            name: ''
+            name: '',
+            showModal: false
         }
         this.submitScore = this.submitScore.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.resetGame = this.resetGame.bind(this)
+        this.toggleLeaderboard = this.toggleLeaderboard.bind(this)
     }
 
     handleChange(e) {
@@ -30,6 +33,12 @@ class WinScreen extends React.Component {
 
     resetGame() {
         this.props.resetGame()
+    }
+
+    toggleLeaderboard() {
+        this.setState({
+            showModal: !this.state.showModal
+        })
     }
 
     render(){
@@ -51,6 +60,8 @@ class WinScreen extends React.Component {
                         <img src="github.png"/>
                     </a>
                 </div>
+                <button onClick={this.toggleLeaderboard}>Show Leaderboard</button>
+                <Leaderboard showModal={this.state.showModal} toggleLeaderboard={this.toggleLeaderboard}/>
             </div>
         )
     }

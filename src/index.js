@@ -4,8 +4,9 @@ import './index.css';
 import firebase from './firebase'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import store from '../src/store'
+import { Provider } from 'react-redux';
+import store from '../src/store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <Provider store={store}>
