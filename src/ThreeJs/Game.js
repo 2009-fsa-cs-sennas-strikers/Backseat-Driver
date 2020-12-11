@@ -14,6 +14,7 @@ import EndZone from './EndZone';
 import WinScreen from '../components/WinScreen';
 import Stopwatch from './Stopwatch';
 import WorldLayout from './WorldLayout';
+import store from '../store'
 
 class Game extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class Game extends React.Component {
           />
           <Physics gravity={[0, -100, 0]}>
             <Plane rotation={[-(Math.PI / 2), 0, 0]} />
-            <EndZone />
+            <EndZone store={store}/>
             <Suspense fallback={<Box />}>
               {
                 <Car
@@ -75,6 +76,7 @@ class Game extends React.Component {
                 stopListening={stopListening}
                 changeWin={this.props.changeWin}
                 changePlaying={this.props.changePlaying}
+                store={store}
                 />
               }
             </Suspense>

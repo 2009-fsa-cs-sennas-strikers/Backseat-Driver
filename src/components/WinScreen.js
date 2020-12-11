@@ -25,4 +25,5 @@ class WinScreen extends React.Component {
   }
 }
 
-export default WinScreen;
+export default WinScreen
+
