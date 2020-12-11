@@ -7,7 +7,7 @@ import { useBox } from '@react-three/cannon'
 
 const Block = (props) => {
   // const blockRef = useRef()
-  const [blockRef, api] = useBox(() => ({type: 'Static', args:[30,10,30], ...props}))
+  const [blockRef, api] = useBox(() => ({type: 'Kinematic', args:[30,10,30], ...props}))
     return (
       <mesh ref={blockRef}>
         <boxBufferGeometry attach="geometry" args={[30,10,30]} />
