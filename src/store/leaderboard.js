@@ -32,11 +32,9 @@ const addToLeaderboard = (newRecord) => ({
 /**
  * THUNK CREATORS
  */
-export const fetchLeaderboard = () => async (dispatch) => {
+export const fetchLeaderboardFromDb = () => async (dispatch) => {
   try {
-    const data = await leaderboardRef.orderBy('score').limit(10).get();
-    // const data = await leaderboardRef.get()
-    const leaderboard = data.docs.map(doc => doc.data());
+    const leaderboard = await leaderboardRef.orderBy('score', 'desc').limit(10).get();
     dispatch(getLeaderboard(leaderboard));
   } catch (error) {
     console.log(error)

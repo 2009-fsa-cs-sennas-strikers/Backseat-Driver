@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { updateTime } from '../store/time'
+import { connect } from 'react-redux'
 
 class Stopwatch extends React.Component {
   constructor() {
@@ -16,6 +15,9 @@ class Stopwatch extends React.Component {
   componentDidMount() {
     //if paused, calculate the pause time (dont subtract and display until unpaused)
     //while paused, elapsedTime = elapsedTime - pauseTime.
+    console.log('mount gamestate', this.props.gameState)
+    //if ...startTimer when isPlaying is true,
+    // if (this.props.gameState.isPlaying) {
     this.timer = setInterval(() => {
       let elapsedTime =
         Math.floor(performance.now() - this.state.startTime) / 1000;
@@ -46,7 +48,6 @@ class Stopwatch extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timer)
-    this.props.updateTime(this.state.elapsedTime)
   }
 
   resetTime() {
@@ -56,7 +57,6 @@ class Stopwatch extends React.Component {
   }
 
   render() {
-    // this.props.updateTime(this.state.elapsedTime)
     return (
       <div id="stopwatch">
         <div id="elapsed-time" />
@@ -67,8 +67,8 @@ class Stopwatch extends React.Component {
   }
 }
 
-const mapDispatch = (dispatch) => ({
-  updateTime: (time) => dispatch(updateTime(time))
+const mapState = (state) => ({
+  gameState: state.gameState
 })
 
-export default connect(null, mapDispatch)(Stopwatch);
+export default connect(mapState)(Stopwatch);
