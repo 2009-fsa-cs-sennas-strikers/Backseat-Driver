@@ -72,7 +72,7 @@ class Game extends React.Component {
               {
                 <Car
                 action={this.state.action}
-                position={[0, 1, 150]}
+                carPosition={[0, 1, 150]}
                 stopListening={stopListening}
                 changeWin={this.props.changeWin}
                 changePlaying={this.props.changePlaying}

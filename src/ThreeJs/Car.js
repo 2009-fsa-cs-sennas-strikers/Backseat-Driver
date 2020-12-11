@@ -16,7 +16,7 @@ const Car = (props) => {
   const [carRef, api] = useBox(() => ({
     mass: 1,
     args: [4.7, 1.3, 2],
-    position: props.position,
+    position: props.carPosition,
   }));
   // const [randoRef, bApi] = useBox(() => ({mass:1, args:[4.7, 1.3, 2]}))
 
