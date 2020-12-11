@@ -55,7 +55,7 @@ class Stopwatch extends React.Component {
   }
 
   render() {
-    // this.props.updateTime(this.state.elapsedTime)
+    this.props.updateTime(this.state.elapsedTime)
     return (
       <div id="stopwatch">
         <div id="elapsed-time" />

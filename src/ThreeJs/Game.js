@@ -49,7 +49,7 @@ class Game extends React.Component {
     return (
       <>
 
-        <Canvas concurrent sRGB gl={{ alpha: false }} colorManagement shadowMap>
+        <Canvas colorManagement shadowMap>
           {/* <OrbitControls /> */}
           <Stars />
           <hemisphereLight intensity={0.5} />

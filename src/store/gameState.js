@@ -54,7 +54,7 @@ export default function gameStateReducer(state = INITIAL_STATE, action) {
       case GAMESTATE_PLAYING:
         return { ...state, isPlaying: action.isPlaying}
     case RESET_GAMESTATE:
-      return INITIAL_STATE;
+      return { ...state, isPlaying: true, hasWon: false};
     default:
       return state;
   }

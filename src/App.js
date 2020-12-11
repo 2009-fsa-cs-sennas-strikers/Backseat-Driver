@@ -6,8 +6,9 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { connect } from 'react-redux'
 import { getGameState, gameStatePlaying, gameStateWin } from './store/gameState'
-import WinScreen from './components/WinScreen'
-import Stopwatch from './ThreeJs/Stopwatch'
+import WinScreen from './components/WinScreen';
+import Stopwatch from './ThreeJs/Stopwatch';
+import store from './store';
 
 class App extends React.Component{
     constructor(){
