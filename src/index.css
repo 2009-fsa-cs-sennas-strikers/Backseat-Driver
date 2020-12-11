@@ -29,7 +29,7 @@ p {
 h1 {
   padding: 0;
   margin: 0;
-  font-size: 10vw;
+  font-size: 8vw;
   font-weight: 500;
   text-shadow: -2px 2px 5px white;
 }
@@ -124,7 +124,7 @@ canvas {
 }
 
 #title {
-  margin-top: 30vh;
+  margin-top: 20vh;
   text-transform: uppercase;
   font-style: italic;
   text-align: center;
