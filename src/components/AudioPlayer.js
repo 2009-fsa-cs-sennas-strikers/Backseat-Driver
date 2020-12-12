@@ -13,11 +13,8 @@ const useAudio = url => {
   },
   [playing]
   );
-  audio.loop = true;
-  audio.volume= 0.5;
 
   useEffect(() => {
-    audio.addEventListener('load', ()=>setPlaying(true));
     audio.addEventListener('ended', () => setPlaying(false));
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
