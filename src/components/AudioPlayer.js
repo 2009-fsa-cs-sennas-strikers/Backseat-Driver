@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from "react";
 
+
+
 const useAudio = url => {
   const [audio] = useState(new Audio('./music/ryan_andersen_synthwave.mp3'));
-  const [playing, setPlaying] = useState(true);
-
-  audio.autoplay = true;
-  audio.play();
-  //
-
-
-
-
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5);
   const toggle = () => setPlaying(!playing);
+
   useEffect(() => {
     playing ? audio.play() : audio.pause();
   },
   [playing]
   );
-
+  audio.loop = true;
+  audio.volume= 0.5;
 
   useEffect(() => {
+    audio.addEventListener('load', ()=>setPlaying(true));
     audio.addEventListener('ended', () => setPlaying(false));
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
     };
   }, []);
-
-
   return [playing, toggle];
 };
 

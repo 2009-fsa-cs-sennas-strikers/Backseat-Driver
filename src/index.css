@@ -11,7 +11,6 @@ body,
 #root {
   margin: 0;
   padding: 0;
-
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -27,18 +26,17 @@ p {
 }
 
 h1 {
-  padding: 0;
+  /* padding: 0;
   margin: 0;
-  font-size: 8vw;
+  font-size: 20vh;
   font-weight: 500;
-  text-shadow: -2px 2px 5px white;
+  text-shadow: -2px 2px 5px white; */
 }
+
 h2 {
-  padding: 0;
-  margin: 0;
-  font-weight: 200;
-  font-size: 2vw;
+
 }
+
 h3 {
   padding: 0;
   margin: 0;
@@ -113,9 +111,9 @@ body {
 #elapsed-label {
   display: flex;
   align-items: center;
-  width: 1vh;
+  font-size: 1.5vh;
+  width: 1vw;
   padding-left: 20px;
-
   margin: 10x;
 }
 
@@ -130,16 +128,34 @@ canvas {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  color: white;
 }
 
 #title {
-  margin-top: 15vh;
+  margin-top: 15%;
   text-transform: uppercase;
   font-style: italic;
   text-align: center;
   /* /* letter-spacing: 0.4em; */
   /* position: fixed; */
   /* transform: translate(-50%, -50%); */
+}
+
+#title h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 8vw;
+  font-weight: 500;
+  text-shadow: -2px 2px 5px white;
+}
+
+#title h2 {
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  margin: 0 auto;
+  font-weight: 200;
+  font-size: 30px;
 }
 
 #github {
@@ -217,11 +233,12 @@ canvas {
 }
 
 #song-info {
+  color: white;
   margin-top: -20px;
   margin-left: 10px;
   text-shadow: -4px 4px 10px black;
   transform: skew(-12deg, -5deg);
-  opacity: 80%;
+  opacity: 100%;
   animation: appear 1s ease, colorize 5s ease-in-out infinite;
 }
 
@@ -232,7 +249,7 @@ canvas {
   }
 
   100% {
-    opacity: 80%;
+    opacity: 100%;
   }
 }
 
@@ -256,4 +273,13 @@ canvas {
 
   text-shadow: 0px 0px 5px white;
   }
+}
+
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
 }
