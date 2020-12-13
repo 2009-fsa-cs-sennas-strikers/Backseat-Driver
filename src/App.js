@@ -10,6 +10,8 @@ import WinScreen from './components/WinScreen';
 import Stopwatch from './ThreeJs/Stopwatch';
 import store from './store';
 import AudioPlayer from './components/AudioPlayer'
+import Github from './components/Github'
+import Instructions from './components/Instructions'
 
 class App extends React.Component{
     constructor(){
@@ -77,9 +79,11 @@ class App extends React.Component{
   render() {
   return (
     <>
+    <Instructions />
     <AudioPlayer />
     {this.renderSwitch(this.state.granted)}
     {this.props.gameState.isPlaying ? <Stopwatch /> : null}
+    <Github />
     </>
   )
   }
