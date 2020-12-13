@@ -45,7 +45,7 @@ class Instructions extends React.Component {
               <tbody>
                 <tr>
                   <td>Go</td>
-                  <td>Gas (continuous)</td>
+                  <td>Gas (Set in first gear)</td>
                 </tr>
                 <tr>
                   <td>Stop</td>
