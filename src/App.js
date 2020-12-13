@@ -60,7 +60,7 @@ class App extends React.Component{
 
 
   renderSwitch(permiss){
-    if (!this.props.gameState.hasWon && !(this.props.gameState.isPlaying)){
+    if (this.props.gameState.hasWon && !(this.props.gameState.isPlaying)){
       return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
     } else {
     switch(permiss){
