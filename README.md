@@ -34,11 +34,6 @@ Down: Slow down
 
 Make it to the yellow goal zone
 
-** inspired by
-
-This app was inspired by 
-
-
 ## Installation
 
 To install Backseat Driver, you will need to be running Node.JS with NPM
