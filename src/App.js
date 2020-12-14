@@ -24,7 +24,7 @@ class App extends React.Component{
     }
 
     componentDidMount(){
-      this.askPermission()
+      // this.askPermission()
     }
 
     changePlaying(){
@@ -63,17 +63,18 @@ class App extends React.Component{
     if (this.props.gameState.hasWon && !(this.props.gameState.isPlaying)){
       return <WinScreen changeWin={this.changeWin} changePlaying={this.changePlaying} />
     } else {
-    switch(permiss){
-      case 'granted':
-        return this.props.gameState.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
-      case 'denied':
-        return <NoPermission />
-      default:
-        this.askPermission()
+    // Switch case breaks compatibility with other browsers
+    // switch(permiss){
+    //   case 'granted':
+    //     return this.props.gameState.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>
+    //   case 'denied':
+    //     return <NoPermission />
+    //   default:
+        // this.askPermission()
       return (
         this.props.gameState.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
+    // }
     }
-  }
   }
 
   render() {
@@ -82,8 +83,7 @@ class App extends React.Component{
     <Instructions />
     <AudioPlayer />
     {this.renderSwitch(this.state.granted)}
-    {this.props.gameState.isPlaying ? <Stopwatch /> : null}
-    <Github />
+    {this.props.gameState.isPlaying ? <Stopwatch /> : <Github />}
     </>
   )
   }

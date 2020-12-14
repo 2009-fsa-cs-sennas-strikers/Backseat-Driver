@@ -9,10 +9,9 @@ import Viewport from './Viewport'
 import Block from './BlockK'
 import { connect } from 'react-redux'
 
-let rotation = 0
+let rotation = -90
 let acc = 0
 let baseVel = 0
-let xX, yY, zZ
 
 const Car = (props) => {
   //carRef: car's property in scene (read only)
@@ -30,7 +29,7 @@ const Car = (props) => {
     carPosition = carRef.current.position;
   }
   const endZonePosition = props.position
-  
+
   useFrame(() => {
   console.log(baseVel, acc)
       if (carPosition.x >=  endZonePosition.x - 10 && carPosition.x <= endZonePosition.x + 10 && carPosition.z  >=  endZonePosition.z - 10 && carPosition.z <= endZonePosition.z + 10) {
@@ -39,7 +38,7 @@ const Car = (props) => {
       props.changeWin()
       props.changePlaying()
     }
-    
+
     api.rotation.set(0, (Math.PI * rotation/180), 0)
   switch (props.action){
     case 'right':
@@ -79,13 +78,13 @@ const Car = (props) => {
       props.setAction('')
     break;
     default:
-     break; 
+     break;
   }
 
     if (rotation === 360 || rotation === -360){
       rotation = 0
     }
-  
+
   switch(Math.round(rotation/90)){
     case 0:
       api.velocity.set(-(baseVel*acc),-1,0)
@@ -111,7 +110,7 @@ const Car = (props) => {
     default:
     break;
   }
-    
+
 
   });
   return (

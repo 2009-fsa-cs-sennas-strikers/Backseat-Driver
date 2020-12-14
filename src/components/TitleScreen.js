@@ -1,12 +1,17 @@
 import React from 'react';
+import Leaderboard from './leaderboard';
 
 
 
 class Title extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false
+    }
     this.hoverSound = this.hoverSound.bind(this);
     this.selectSound = this.selectSound.bind(this);
+    this.toggleLeaderboard = this.toggleLeaderboard.bind(this)
   }
   toggleSfx = new Audio('./sfx/toggle.mp3');
   selectSfx = new Audio('./sfx/select.mp3')
@@ -21,6 +26,13 @@ class Title extends React.Component {
       this.selectSfx.play();
   }
 
+  toggleLeaderboard() {
+    this.selectSound();
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  }
+
   render() {
     return (
       <div className="home">
@@ -31,9 +43,24 @@ class Title extends React.Component {
           <h2>A voice-command driven 3D interactive simulation</h2>
           <p>Please backseat drive responsibly.</p>
         </div>
-        <button id="playButton" onMouseOver={()=>this.hoverSound()} onClick={() => (this.props.changePlaying(), this.selectSound())}>
+        <div id="button-row">
+          <button
+            id="leaderboard-button"
+            onMouseOver={this.hoverSound}
+            onClick={this.toggleLeaderboard}
+          >
+            Leaderboard
+          </button>
+          {this.state.showModal && (
+            <Leaderboard
+              showModal={this.state.showModal}
+              toggleLeaderboard={this.toggleLeaderboard}
+            />
+          )}
+          <button id="playButton" onMouseOver={()=>this.hoverSound()} onClick={() => (this.props.changePlaying(), this.selectSound())}>
           Drive
         </button>
+        </div>
         <div className="definition">
           <p>backseat driver<br />
           <span id="defnoun">noun</span> : a passenger in a car who gives usually unwanted driving advice to the driver</p>
