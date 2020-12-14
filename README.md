@@ -25,12 +25,12 @@ Firebase as a database and deployment provider, React for modular front end rend
 
 Use the following voice commands to move your car
 
--Go: Gas (set to first gear)
--Stop: Stop
--Right: Turn 90 degrees right
--Left: Turn 90 degrees left
--Up: Speed up
--Down: Slow down
+- Go: Gas (set to first gear)
+- Stop: Stop
+- Right: Turn 90 degrees right
+- Left: Turn 90 degrees left
+- Up: Speed up
+- Down: Slow down
 
 Make it to the yellow goal zone
 
