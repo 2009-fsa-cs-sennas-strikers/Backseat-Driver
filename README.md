@@ -1,4 +1,4 @@
-### Backseat Driver
+## Backseat Driver
 
 A voice command driven 3D interactive simulation
 
@@ -6,7 +6,7 @@ A voice command driven 3D interactive simulation
 
 A live version of this app is available at https://backseat-driver-dbc21.web.app/
 
-### Gameplay Mechanics
+## Gameplay Mechanics
 
 Backseat driver is a 3D driving simulation in which the player's movement is controlled
 not by keyboard commands, but by voice commands. The player's goal is to navigate through a
@@ -14,14 +14,14 @@ not by keyboard commands, but by voice commands. The player's goal is to navigat
 several concise commands [stop, go, left, right, up, down] to traverse the world. Course completion 
 is timed and saved when player has reached the goal.
 
-### Technologies
+## Technologies
 
 Backseat Driver is developed with Node.JS, React-three-fiber for 3D world rendering, Cannon.JS for a physics engine, TenserFlow.JS for voice recognition
 Firebase as a database and deployment provider, React for modular front end rendering, Redux for application and game state management.
 
 --insert picture of all technologies web--
 
-### How to Play
+## How to Play
 
 Use the following voice commands to move your car
 
@@ -52,7 +52,7 @@ Then start the app with the command
 
 The game will be available at http://localhost:8080
 
-### Credits
+## Credits
 
 Ryan Andeerson - Synthwave
 kingman257 - McClaren Car 3D Model
