@@ -34,6 +34,10 @@ class Title extends React.Component {
         <button id="playButton" onMouseOver={()=>this.hoverSound()} onClick={() => (this.props.changePlaying(), this.selectSound())}>
           Drive
         </button>
+        <div className="definition">
+          <p>backseat driver<br />
+          <span id="defnoun">noun</span> : a passenger in a car who gives usually unwanted driving advice to the driver</p>
+        </div>
       </div>
     );
   }

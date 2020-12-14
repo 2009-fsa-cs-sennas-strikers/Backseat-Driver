@@ -97,7 +97,7 @@ canvas {
 }
 
 .home {
-  padding: 100px;
+  padding: 100px 100px 0 100px;
   display: flex;
   height: 80%;
   flex-direction: column;
@@ -123,6 +123,19 @@ canvas {
   text-shadow: -2px 2px 5px white;
 }
 
+.definition {
+  text-align: center;
+  margin-top: auto;
+}
+
+.definition p {
+  font-size: 18px;
+  letter-spacing: 0.1em;
+}
+
+#defnoun {
+  font-style: italic;
+}
 
 .message {
   display: flex;
@@ -406,4 +419,18 @@ font-weight: 600;
 div.modal-content p {
   color: white;
   padding: 10px;
+  }
+
+  #restart-button {
+    position: fixed;
+    z-index: 10;
+    top: 40px;
+    right: 100px;
+    color: white;
+    font-size: 24px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 50px;
+    width: 80px;
+    height: 50px;
   }
