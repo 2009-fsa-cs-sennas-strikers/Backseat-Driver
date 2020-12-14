@@ -72,7 +72,7 @@ class App extends React.Component{
     //   default:
         // this.askPermission()
       return (
-        this.props.gameState.isPlaying ?  <Game /> : <Title changePlaying={this.changePlaying}/>)
+        this.props.gameState.isPlaying ?  <Game changeWin={this.changeWin} changePlaying={this.changePlaying} /> : <Title changePlaying={this.changePlaying}/>)
     // }
     }
   }
