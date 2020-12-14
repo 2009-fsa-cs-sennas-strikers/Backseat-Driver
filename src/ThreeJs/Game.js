@@ -6,15 +6,11 @@ import { Physics } from '@react-three/cannon';
 import Car from './Car';
 import Box from './Box';
 import Plane from './PlaneofExistence';
-import Viewport from './Viewport';
-import Block from './Block';
-import BlockK from './BlockK';
 import SidePlane from './SidePlane';
 import EndZone from './EndZone';
-import WinScreen from '../components/WinScreen';
-import Stopwatch from './Stopwatch';
 import WorldLayout from './WorldLayout';
-import store from '../store'
+import store from '../store';
+import RestartButton from '../components/RestartButton';
 
 class Game extends React.Component {
   constructor(props) {
@@ -48,6 +44,7 @@ class Game extends React.Component {
   render() {
     return (
       <>
+        <RestartButton />
         <Canvas colorManagement shadowMap>
           {/* <OrbitControls /> */}
           <Stars />

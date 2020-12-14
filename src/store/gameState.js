@@ -7,6 +7,7 @@ const GET_GAMESTATE = 'GET_GAMESTATE';
 const GAMESTATE_WIN = 'GAMESTATE_WIN';
 const GAMESTATE_PLAYING = 'GAMESTATE_PLAYING';
 const RESET_GAMESTATE = 'RESET_GAMESTATE';
+const RESTART_GAMESTATE = 'RESTART_GAME_STATE'
 
 /**
  * INITIAL STATE
@@ -38,6 +39,10 @@ export const resetGameState = () => ({
   type: RESET_GAMESTATE,
 });
 
+export const restartGameState = () => ({
+  type: RESTART_GAMESTATE
+})
+
 /**
  * THUNK CREATORS
  */
@@ -55,6 +60,8 @@ export default function gameStateReducer(state = INITIAL_STATE, action) {
         return { ...state, isPlaying: action.isPlaying}
     case RESET_GAMESTATE:
       return { ...state, isPlaying: true, hasWon: false};
+    case RESTART_GAMESTATE:
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -38,14 +38,14 @@ class Instructions extends React.Component {
             <Table responsive>
               <thead>
                 <tr>
-                  <th>Commands</th>
+                  <th>Voice Commands</th>
                   <th>Description</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Go</td>
-                  <td>Gas (Set in first gear)</td>
+                  <td>Gas (Set to first gear)</td>
                 </tr>
                 <tr>
                   <td>Stop</td>
@@ -79,7 +79,7 @@ class Instructions extends React.Component {
             </Table>
             <p>
               Please Note: Game rendering is based on device GPU. Best
-              performance of game will be depenedent on device ability to render
+              performance of game will be dependent on device ability to render
               WebGL graphics.
             </p>
             <button onClick={this.toggleInstructions}>
