@@ -46,10 +46,12 @@ class Leaderboard extends React.Component{
       <Modal centered show={this.props.showModal} onHide={this.props.toggleLeaderboard}dialogClassName="leaderboard-modal">
         <div>
 
-          <h1>Top 10 Backseat Drivers</h1>
+          <h1>Backseat Driver Leaderboard</h1>
+          <div className="table-shell">
           <Table responsive>
             <thead>
               <tr>
+                <th></th>
                 <th>Name</th>
                 <th>Course Time</th>
               </tr>
@@ -57,7 +59,8 @@ class Leaderboard extends React.Component{
             <tbody>
               {
                 leaderboard.map((record, idx) => (
-                  <tr key={idx}>
+                  <tr key={record.idx}>
+                    <td></td>
                     <td>{record.name}</td>
                     <td><i>{this.formatScore(record.score)}</i></td>
                   </tr>
@@ -65,6 +68,7 @@ class Leaderboard extends React.Component{
               }
             </tbody>
           </Table>
+          </div>
           <button onClick={this.props.toggleLeaderboard}>Close
         Leaderboard</button>
         </div>

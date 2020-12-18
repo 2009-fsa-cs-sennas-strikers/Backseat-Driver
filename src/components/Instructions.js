@@ -31,6 +31,8 @@ class Instructions extends React.Component {
         >
           <div>
             <h1>Driving simulation requires use of device microphone</h1>
+          </div>
+          <div className="table-shell">
             <p>How to play:
               Navigate from your start position to the yellow end zone.
               Only clear, concise verbal commands will drive the car.
@@ -38,7 +40,7 @@ class Instructions extends React.Component {
             <Table responsive>
               <thead>
                 <tr>
-                  <th>Voice Commands</th>
+                  <th>Commands</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -82,10 +84,11 @@ class Instructions extends React.Component {
               performance of game will be dependent on device ability to render
               WebGL graphics.
             </p>
+            </div>
             <button onClick={this.toggleInstructions}>
               Close Instructions
             </button>
-          </div>
+
         </Modal>
       </>
     );
