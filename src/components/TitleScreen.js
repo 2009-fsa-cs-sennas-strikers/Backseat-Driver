@@ -1,29 +1,27 @@
 import React from 'react';
 import Leaderboard from './leaderboard';
 
-
-
 class Title extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
-    }
+      showModal: false,
+    };
     this.hoverSound = this.hoverSound.bind(this);
     this.selectSound = this.selectSound.bind(this);
-    this.toggleLeaderboard = this.toggleLeaderboard.bind(this)
+    this.toggleLeaderboard = this.toggleLeaderboard.bind(this);
   }
   toggleSfx = new Audio('./sfx/toggle.mp3');
-  selectSfx = new Audio('./sfx/select.mp3')
+  selectSfx = new Audio('./sfx/select.mp3');
 
   hoverSound() {
-      this.toggleSfx.volume = 0.5;
-      this.toggleSfx.play();
+    this.toggleSfx.volume = 0.5;
+    this.toggleSfx.play();
   }
 
   selectSound() {
     this.selectSfx.volume = 0.5;
-      this.selectSfx.play();
+    this.selectSfx.play();
   }
 
   toggleLeaderboard() {
@@ -45,7 +43,7 @@ class Title extends React.Component {
         </div>
         <div id="button-row">
           <button
-            id="leaderboard-button"
+            id="play-button"
             onMouseOver={this.hoverSound}
             onClick={this.toggleLeaderboard}
           >
@@ -57,13 +55,21 @@ class Title extends React.Component {
               toggleLeaderboard={this.toggleLeaderboard}
             />
           )}
-          <button id="playButton" onMouseOver={()=>this.hoverSound()} onClick={() => (this.props.changePlaying(), this.selectSound())}>
-          Drive
-        </button>
+          <button
+            id="play-button"
+            onMouseOver={() => this.hoverSound()}
+            onClick={() => (this.props.changePlaying(), this.selectSound())}
+          >
+            Drive
+          </button>
         </div>
-        <div className="definition">
-          <p>backseat driver<br />
-          <span id="defnoun">noun</span> : a passenger in a car who gives usually unwanted driving advice to the driver</p>
+        <div className="message">
+          <p>
+            backseat driver
+            <br />
+            <span id="defnoun">noun</span> : a passenger in a car who gives
+            usually unwanted driving advice to the driver
+          </p>
         </div>
       </div>
     );
