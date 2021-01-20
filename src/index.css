@@ -20,20 +20,26 @@ body,
   /* overflow: hidden; */
 }
 
+html {
+  height: 100%;
+}
 #root {
-  width: 100vw;
   height: 100vh;
+  width: 100wv;
+  overflow: auto;
   font-family: 'Titillium Web', sans-serif;
-  background: linear-gradient(#272727, #000000);
 }
 
 body {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   /* font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
     helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, aråial,
     sans-serif; */
   /* font-family: 'Titillium Web', sans-serif; */
   color: white;
-  background: linear-gradient(#272727, #000000);
+  background: linear-gradient(0deg, #272727, #000000);
 }
 
 .controls {
@@ -69,8 +75,8 @@ body {
   /* border-top: 1px solid white;
   border-bottom: 1px solid white; */
   z-index: 10;
-  bottom: 50px;
-  left: 50px;
+  bottom: 20px;
+  left: 20px;
   transform: skew(12deg, 5deg);
 }
 
@@ -97,7 +103,7 @@ canvas {
 }
 
 .home {
-  padding: 100px 100px 0 100px;
+  padding: 2vh 1vh 0 1vh;
   display: flex;
   height: 80%;
   flex-direction: column;
@@ -116,9 +122,10 @@ canvas {
 }
 
 .title h1 {
+  color: white;
   padding: 0;
   margin: 0;
-  font-size: 80px;
+  font-size: 7vw;
   font-weight: 500;
   text-shadow: -2px 2px 5px white;
 }
@@ -151,7 +158,7 @@ canvas {
   margin: 0;
   margin: 0 auto;
   font-weight: 200;
-  font-size: 30px;
+  font-size: 3.5vw;
 }
 
 .message p {
@@ -161,19 +168,17 @@ canvas {
 }
 
 #github {
-  position: absolute;
-  bottom: 5%;
-  width: 100%;
-  text-align: center;
+  position: fixed;
+  right: 20px;
+  top: 80px;
   z-index: 10;
   border-radius: 100px;
 }
-#github img{
+#github img {
   width: 50px;
 }
 
-
-#playButton {
+/* #play-button {
   margin: 10px 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -195,12 +200,12 @@ canvas {
   animation-timing-function: ease-in-out;
 }
 
-#playButton:hover {
+#play-button:hover {
   color: black;
   border: 1px solid white;
   background: linear-gradient(#ffffff, #a1a1a1);
   font-weight: 400;
-}
+} */
 
 @keyframes hover {
   0% {
@@ -222,8 +227,8 @@ canvas {
   align-items: bottom;
   position: fixed;
   z-index: 10;
-  top: 40px;
-  left: 30px;
+  top: 20px;
+  left: 20px;
 }
 
 #audio-button {
@@ -248,12 +253,11 @@ canvas {
   animation: appear 1s ease, colorize 5s ease-in-out infinite;
 }
 
-
 #instruction-button {
   position: fixed;
   z-index: 10;
-  top: 40px;
-  right: 30px;
+  top: 20px;
+  right: 20px;
   color: white;
   font-size: 24px;
   background-color: transparent;
@@ -278,33 +282,27 @@ canvas {
 
 @keyframes colorize {
   0% {
-  text-shadow: 0x 0px 5px black;
+    text-shadow: 0x 0px 5px black;
   }
   25% {
-
     text-shadow: 0px 0px 5px hotpink;
   }
   50% {
-
     text-shadow: 0px 0px 5px cyan;
   }
-  75%{
-
+  75% {
     text-shadow: 0px 0px 5px yellow;
   }
   100% {
-
-  text-shadow: 0px 0px 5px white;
+    text-shadow: 0px 0px 5px white;
   }
 }
-
 
 #score-submission {
   display: flex;
   flex-direction: column;
   transform: skew(-10deg);
   font-size: 24px;
-
 }
 
 #score-submission label {
@@ -330,15 +328,13 @@ canvas {
   border: 1px solid white;
   padding: 10px;
   transition: 0.3s ease all;
-
 }
 
 #score-submission button:hover {
   font-weight: 600;
-
 }
 
-#leaderboard-button {
+#play-button {
   margin: 10px 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -358,17 +354,17 @@ canvas {
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
-
 }
 
-#leaderboard-button:hover {
+#play-button:hover {
   color: black;
   border: 1px solid white;
   background: linear-gradient(#ffffff, #a1a1a1);
   font-weight: 400;
 }
 
-.leaderboard-modal, .instruction-modal{
+.leaderboard-modal,
+.instruction-modal {
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -387,7 +383,8 @@ div.modal-content h1 {
   font-style: italic;
 }
 
-.leaderboard-modal table, .instruction-modal table {
+.leaderboard-modal table,
+.instruction-modal table {
   color: white;
   font-family: 'Titillium Web', sans-serif;
   font-size: 20px;
@@ -399,8 +396,9 @@ table.table thead th {
   border-bottom: 2px solid #cccccc6e;
 }
 
-table.table td, table.table th {
-  border-top:1px solid #cccccc6e;
+table.table td,
+table.table th {
+  border-top: 1px solid #cccccc6e;
 }
 
 div.modal-content button {
@@ -413,29 +411,88 @@ div.modal-content button {
 }
 
 div.modal-content button:hover {
-font-weight: 600;
+  font-weight: 600;
 }
 
 div.modal-content p {
   color: white;
   padding: 10px;
-  }
+}
 
-  #restart-button {
-    position: fixed;
-    z-index: 10;
-    top: 40px;
-    right: 100px;
-    color: white;
-    font-size: 20px;
-    background-color: transparent;
-    border: 4px solid white;
-    border-radius: 50px;
-    width: 100px;
-    height: 50px;
-  }
+#restart-button {
+  position: fixed;
+  z-index: 10;
+  top: 20px;
+  right: 80px;
+  color: white;
+  font-size: 20px;
+  background-color: transparent;
+  border: 4px solid white;
+  border-radius: 50px;
+  width: 100px;
+  height: 50px;
+}
 
 .table-shell {
   height: 55vh;
-  overflow-y:scroll;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 767px) {
+  .home {
+    padding: 100px 20px;
+  }
+
+  .title h1 {
+    font-size: 10vw;
+  }
+  .message h2 {
+    font-size: 5vw;
+  }
+  .message p {
+    font-size: 4vw;
+  }
+  #button-row {
+    padding: 15px 0px;
+  }
+  #play-button {
+    font-size: 5vw;
+  }
+  #audio-player {
+    width: 170px;
+  }
+  #song-info h3,
+  #song-info h4 {
+    font-size: 16px;
+  }
+  #audio-button {
+    width: 35px;
+    height: 35px;
+  }
+  #audio-button img {
+    width: 35px;
+    height: 35px;
+  }
+  #restart-button {
+    border: 2px solid white;
+    font-size: 14px;
+    height: 35px;
+    width: 80px;
+  }
+  #instruction-button {
+    border: 2px solid white;
+    font-size: 14px;
+    height: 35px;
+    width: 35px;
+  }
+  .leaderboard-modal table,
+  .instruction-modal table {
+    font-size: 16px;
+  }
+  #github img {
+    width: 35px;
+  }
+  #score-submission input {
+    width: 50vw;
+  }
 }

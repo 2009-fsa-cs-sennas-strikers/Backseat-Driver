@@ -108,7 +108,9 @@ class WinScreen extends React.Component {
                   value={this.state.name}
                   onChange={(e) => this.handleChange(e)}
                 />
-                <button onMouseOver={this.hoverSound} type="submit">Submit</button>
+                <button onMouseOver={this.hoverSound} type="submit">
+                  Submit
+                </button>
               </div>
             </form>
           ) : (
@@ -121,7 +123,7 @@ class WinScreen extends React.Component {
         </div>
         <div id="button-row">
           <button
-            id="leaderboard-button"
+            id="play-button"
             onMouseOver={this.hoverSound}
             onClick={this.toggleLeaderboard}
           >
@@ -134,7 +136,7 @@ class WinScreen extends React.Component {
             />
           )}
           <button
-            id="playButton"
+            id="play-button"
             onMouseOver={this.hoverSound}
             onClick={this.resetGame}
           >
